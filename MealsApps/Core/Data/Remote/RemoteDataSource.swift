@@ -9,25 +9,27 @@
 import Foundation
 
 protocol RemoteDataSourceProtocol: class {
-    func getMeals(completion: @escaping ([MealResponse]) -> Void)
+    func getMeals(result: @escaping (Result<[MealResponse], URLError>) -> Void)
 }
 
 class RemoteDataSource: RemoteDataSourceProtocol {
 
-    func getMeals(completion: @escaping ([MealResponse]) -> Void) {
+    func getMeals(result: @escaping (Result<[MealResponse], URLError>) -> Void) {
         guard let url = URL(string: Endpoints.Gets.categories.url) else { return }
 
-        let task = URLSession.shared.dataTask(with: url) { data, response, _ in
-            guard let response = response as? HTTPURLResponse, let data = data else { return }
-
-            if response.statusCode == 200 {
+        let task = URLSession.shared.dataTask(with: url) { maybeData, maybeResponse, maybeError in
+            if maybeError != nil {
+                result(.failure(.addressUnreachable(url)))
+            } else if let data = maybeData, let response = maybeResponse as? HTTPURLResponse, response.statusCode == 200 {
                 let decoder = JSONDecoder()
-                guard let response = try? decoder.decode(MealsResponse.self, from: data) else { return }
-
-                completion(response.meals)
+                do {
+                    let response = try decoder.decode(MealsResponse.self, from: data)
+                    result(.success(response.meals))
+                } catch {
+                    result(.failure(.invalidResponse))
+                }
             }
         }
-
         task.resume()
     }
 }

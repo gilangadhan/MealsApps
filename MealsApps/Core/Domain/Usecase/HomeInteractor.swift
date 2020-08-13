@@ -22,8 +22,8 @@ class HomeInteractor: HomeInteractorProtocol {
     }
 
     func getMeals() {
-        repository?.getMeals { meals in
-            self.presenter?.interactor(self, didFetch: meals)
+        repository?.getMeals { result in
+            self.presenter?.interactor(self, didFetch: result)
         }
     }
 }

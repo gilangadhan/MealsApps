@@ -9,7 +9,7 @@
 import Foundation
 
 protocol MealRepositorProtocol {
-    func getMeals(completion: @escaping ([Meal]) -> Void)
+    func getMeals(result: @escaping (Result<[Meal], Error>) -> Void)
 }
 
 class MealRepository: MealRepositorProtocol {
@@ -23,13 +23,18 @@ class MealRepository: MealRepositorProtocol {
         self.remote = remote
     }
 
-    func getMeals(completion: @escaping ([Meal]) -> Void) {
+    func getMeals(result: @escaping (Result<[Meal], Error>) -> Void) {
         remote?.getMeals { responses in
-            for meal in responses {
-                if let id = meal.id, let title = meal.title, let image = meal.image, let description = meal.description {
-                    self.meals.append(Meal(id: id, title: title, image: image, description: description))
-                    completion(self.meals)
+            switch responses {
+            case .success(let meals):
+                for meal in meals {
+                    if let id = meal.id, let title = meal.title, let image = meal.image, let description = meal.description {
+                        self.meals.append(Meal(id: id, title: title, image: image, description: description))
+                        result(.success(self.meals))
+                    }
                 }
+            case .failure(let error):
+                result(.failure(error))
             }
         }
     }

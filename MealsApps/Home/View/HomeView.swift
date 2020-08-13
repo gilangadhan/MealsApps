@@ -10,15 +10,24 @@ import SwiftUI
 
 struct HomeView: View {
     @ObservedObject var presenter: HomePresenter
-    var meals: [Meal]?
+
     var interactor: HomeInteractorProtocol?
     var wireframe: HomeRouterProtocol?
-
+    
     var body: some View {
-        List {
-            ForEach(presenter.meals, id: \.id) { meal in
-                ZStack {
-                    MovieRow(meal: meal)
+        ZStack {
+            if presenter.loadingState {
+                VStack {
+                    Text("Loading...")
+                    ActivityIndicator()
+                }
+            } else {
+                List {
+                    ForEach(self.presenter.meals, id: \.id) { meal in
+                        ZStack {
+                            MovieRow(meal: meal)
+                        }
+                    }
                 }
             }
         }
