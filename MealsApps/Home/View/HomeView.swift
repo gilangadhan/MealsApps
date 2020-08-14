@@ -12,8 +12,7 @@ struct HomeView: View {
     @ObservedObject var presenter: HomePresenter
 
     var interactor: HomeInteractorProtocol?
-    var wireframe: HomeRouterProtocol?
-    
+
     var body: some View {
         ZStack {
             if presenter.loadingState {
@@ -23,15 +22,19 @@ struct HomeView: View {
                 }
             } else {
                 List {
-                    ForEach(self.presenter.meals, id: \.id) { meal in
+                    ForEach(self.presenter.categories, id: \.id) { category in
                         ZStack {
-                            MovieRow(meal: meal)
+                            self.presenter.linkBuilder(for: category) {
+                                CategoryRow(category: category)
+                            }
                         }
                     }
                 }
             }
-        }
-        .onAppear(perform: { self.presenter.getMeals() })
-        .navigationBarTitle(Text("Movie Catalogue"), displayMode: .inline)
+        }.onAppear {
+            if self.presenter.categories.count == 0 {
+                self.presenter.getCategories()
+            }
+        }.navigationBarTitle(Text("Meals Apps"), displayMode: .automatic)
     }
 }

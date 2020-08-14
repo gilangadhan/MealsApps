@@ -1,30 +1,25 @@
 //
-//  CategoriesResponse.swift
+//  MealsResponse.swift
 //  MealsApps
 //
-//  Created by Gilang Ramadhan on 11/08/20.
+//  Created by Gilang Ramadhan on 14/08/20.
 //  Copyright © 2020 Dicoding Indonesia. All rights reserved.
 //
 
 import Foundation
 
 struct MealsResponse: Decodable {
-    private enum CodingKeys: String, CodingKey {
-        case meals = "categories"
-    }
     let meals: [MealResponse]
 }
 
 struct MealResponse: Decodable {
     private enum CodingKeys: String, CodingKey {
-        case id = "idCategory"
-        case title = "strCategory"
-        case image = "strCategoryThumb"
-        case description = "strCategoryDescription"
+        case id = "idMeal"
+        case title = "strMeal"
+        case image = "strMealThumb"
     }
 
     let id: String?
     let title: String?
     let image: String?
-    let description: String?
 }

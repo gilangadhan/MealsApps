@@ -6,12 +6,13 @@
 //  Copyright © 2020 Dicoding Indonesia. All rights reserved.
 //
 
-import UIKit
+import SwiftUI
 
-protocol HomeRouterProtocol {
-
-}
-
-class HomeRouter: HomeRouterProtocol {
-
+class HomeRouter {
+    func makeDetailView(for category: CategoryModel) -> some View {
+        let interactor = DetailInteractor(repository: MealRepository(locale: LocaleDataSource(), remote: RemoteDataSource()))
+        let presenter = DetailPresenter(interactor: interactor)
+        interactor.presenter = presenter
+        return DetailView(presenter: presenter, category: category)
+    }
 }

@@ -9,13 +9,15 @@
 import SwiftUI
 
 protocol HomePresenterProtocol: class {
-    func interactor(_ interactor: HomeInteractorProtocol, didFetch object: Result<[Meal], Error>)
+    func interactor(_ interactor: HomeInteractorProtocol, didFetch object: Result<[CategoryModel], Error>)
 }
 
 class HomePresenter: ObservableObject {
-    @Published var meals: [Meal] = []
+    @Published var categories: [CategoryModel] = []
     @Published var errorMessage: String = ""
     @Published var loadingState: Bool = false
+
+    private let router = HomeRouter()
 
     let interactor: HomeInteractorProtocol
 
@@ -23,19 +25,27 @@ class HomePresenter: ObservableObject {
         self.interactor = interactor
     }
 
-    func getMeals() {
+    func getCategories() {
         loadingState = true
-        interactor.getMeals()
+        interactor.getCategories()
+    }
+
+    func linkBuilder<Content: View>(
+        for category: CategoryModel,
+        @ViewBuilder content: () -> Content
+    ) -> some View {
+        NavigationLink(
+            destination: router.makeDetailView(for: category)) { content() }
     }
 }
 
 extension HomePresenter: HomePresenterProtocol {
-    func interactor(_ interactor: HomeInteractorProtocol, didFetch result: Result<[Meal], Error>) {
+    func interactor(_ interactor: HomeInteractorProtocol, didFetch result: Result<[CategoryModel], Error>) {
         switch result {
-        case .success(let meals):
+        case .success(let categories):
             DispatchQueue.main.async {
                 self.loadingState = false
-                self.meals = meals
+                self.categories = categories
             }
         case .failure(let error):
             DispatchQueue.main.async {

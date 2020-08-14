@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,13 +13,12 @@
 		2A6869E824E278DF00E7BD16 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A6869E724E278DF00E7BD16 /* Assets.xcassets */; };
 		2A6869EB24E278DF00E7BD16 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A6869EA24E278DF00E7BD16 /* Preview Assets.xcassets */; };
 		2A6869EE24E278DF00E7BD16 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A6869EC24E278DF00E7BD16 /* LaunchScreen.storyboard */; };
-		2A686A0224E2797F00E7BD16 /* MealsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A686A0124E2797F00E7BD16 /* MealsResponse.swift */; };
-		2A686A0424E27BF400E7BD16 /* ApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A686A0324E27BF400E7BD16 /* ApiResponse.swift */; };
+		2A686A0224E2797F00E7BD16 /* CategoriesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A686A0124E2797F00E7BD16 /* CategoriesResponse.swift */; };
 		2A686A0624E27E0800E7BD16 /* RemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A686A0524E27E0800E7BD16 /* RemoteDataSource.swift */; };
 		2A686A0C24E282D200E7BD16 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 2A686A0B24E282D200E7BD16 /* .swiftlint.yml */; };
 		2A686A0E24E283DB00E7BD16 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A686A0D24E283DB00E7BD16 /* HomeView.swift */; };
-		2A686A1024E2842400E7BD16 /* HomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A686A0F24E2842400E7BD16 /* HomeCell.swift */; };
-		2A686A1324E2846D00E7BD16 /* Meal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A686A1224E2846D00E7BD16 /* Meal.swift */; };
+		2A686A1024E2842400E7BD16 /* CategoryRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A686A0F24E2842400E7BD16 /* CategoryRow.swift */; };
+		2A686A1324E2846D00E7BD16 /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A686A1224E2846D00E7BD16 /* CategoryModel.swift */; };
 		2A686A1624E285EE00E7BD16 /* HomeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A686A1524E285EE00E7BD16 /* HomeInteractor.swift */; };
 		2A686A1824E2868300E7BD16 /* MealRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A686A1724E2868300E7BD16 /* MealRepository.swift */; };
 		2A686A1A24E288DC00E7BD16 /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A686A1924E288DC00E7BD16 /* HomePresenter.swift */; };
@@ -28,11 +27,19 @@
 		2A686A3424E3DBD600E7BD16 /* MealBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A686A3324E3DBD600E7BD16 /* MealBuilder.swift */; };
 		2A686A3624E3DCF600E7BD16 /* LocaleDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A686A3524E3DCF600E7BD16 /* LocaleDataSource.swift */; };
 		2A686A3924E52EFF00E7BD16 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A686A3824E52EFF00E7BD16 /* ActivityIndicator.swift */; };
-		2A686A3D24E53A9B00E7BD16 /* AsyncImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A686A3C24E53A9B00E7BD16 /* AsyncImage.swift */; };
 		2A686A3F24E53C0300E7BD16 /* CustomeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A686A3E24E53C0300E7BD16 /* CustomeError.swift */; };
+		2AE4C88124E5950200825370 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE4C88024E5950200825370 /* DetailView.swift */; };
+		2AE4C88324E5951700825370 /* DetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE4C88224E5951700825370 /* DetailPresenter.swift */; };
+		2AE4C88724E5964600825370 /* DetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE4C88624E5964600825370 /* DetailInteractor.swift */; };
+		2AE4C88924E6480800825370 /* MealsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE4C88824E6480800825370 /* MealsResponse.swift */; };
+		2AE4C88B24E6490D00825370 /* MealModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE4C88A24E6490D00825370 /* MealModel.swift */; };
+		2AE4C88E24E64BC900825370 /* MealRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE4C88D24E64BC900825370 /* MealRow.swift */; };
+		2AE4C89224E6662900825370 /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE4C89124E6662900825370 /* BlurView.swift */; };
+		5EED440B08814CE131513506 /* Pods_MealsApps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF740A8A1B3BD3133C99C4D1 /* Pods_MealsApps.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		130ACBB0F15D7DBB79F8F5E9 /* Pods-MealsApps.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MealsApps.release.xcconfig"; path = "Target Support Files/Pods-MealsApps/Pods-MealsApps.release.xcconfig"; sourceTree = "<group>"; };
 		2A6869DE24E278DD00E7BD16 /* MealsApps.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MealsApps.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A6869E124E278DD00E7BD16 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2A6869E324E278DD00E7BD16 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -41,13 +48,12 @@
 		2A6869EA24E278DF00E7BD16 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2A6869ED24E278DF00E7BD16 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2A6869EF24E278DF00E7BD16 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2A686A0124E2797F00E7BD16 /* MealsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealsResponse.swift; sourceTree = "<group>"; };
-		2A686A0324E27BF400E7BD16 /* ApiResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiResponse.swift; sourceTree = "<group>"; };
+		2A686A0124E2797F00E7BD16 /* CategoriesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesResponse.swift; sourceTree = "<group>"; };
 		2A686A0524E27E0800E7BD16 /* RemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDataSource.swift; sourceTree = "<group>"; };
 		2A686A0B24E282D200E7BD16 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		2A686A0D24E283DB00E7BD16 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		2A686A0F24E2842400E7BD16 /* HomeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCell.swift; sourceTree = "<group>"; };
-		2A686A1224E2846D00E7BD16 /* Meal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meal.swift; sourceTree = "<group>"; };
+		2A686A0F24E2842400E7BD16 /* CategoryRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryRow.swift; sourceTree = "<group>"; };
+		2A686A1224E2846D00E7BD16 /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
 		2A686A1524E285EE00E7BD16 /* HomeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeInteractor.swift; sourceTree = "<group>"; };
 		2A686A1724E2868300E7BD16 /* MealRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealRepository.swift; sourceTree = "<group>"; };
 		2A686A1924E288DC00E7BD16 /* HomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
@@ -56,8 +62,16 @@
 		2A686A3324E3DBD600E7BD16 /* MealBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealBuilder.swift; sourceTree = "<group>"; };
 		2A686A3524E3DCF600E7BD16 /* LocaleDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocaleDataSource.swift; sourceTree = "<group>"; };
 		2A686A3824E52EFF00E7BD16 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
-		2A686A3C24E53A9B00E7BD16 /* AsyncImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImage.swift; sourceTree = "<group>"; };
 		2A686A3E24E53C0300E7BD16 /* CustomeError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomeError.swift; sourceTree = "<group>"; };
+		2AE4C88024E5950200825370 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		2AE4C88224E5951700825370 /* DetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPresenter.swift; sourceTree = "<group>"; };
+		2AE4C88624E5964600825370 /* DetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInteractor.swift; sourceTree = "<group>"; };
+		2AE4C88824E6480800825370 /* MealsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealsResponse.swift; sourceTree = "<group>"; };
+		2AE4C88A24E6490D00825370 /* MealModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealModel.swift; sourceTree = "<group>"; };
+		2AE4C88D24E64BC900825370 /* MealRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealRow.swift; sourceTree = "<group>"; };
+		2AE4C89124E6662900825370 /* BlurView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
+		E5B25AC9E9849FED69F0FB0C /* Pods-MealsApps.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MealsApps.debug.xcconfig"; path = "Target Support Files/Pods-MealsApps/Pods-MealsApps.debug.xcconfig"; sourceTree = "<group>"; };
+		EF740A8A1B3BD3133C99C4D1 /* Pods_MealsApps.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MealsApps.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +79,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5EED440B08814CE131513506 /* Pods_MealsApps.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -77,6 +92,8 @@
 				2A686A0B24E282D200E7BD16 /* .swiftlint.yml */,
 				2A6869E024E278DD00E7BD16 /* MealsApps */,
 				2A6869DF24E278DD00E7BD16 /* Products */,
+				A872F3387C4C3FD8F1308BBE /* Pods */,
+				7EB89E0F47BB5D57CA04E780 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -154,6 +171,9 @@
 		2A6869F924E2792300E7BD16 /* Detail */ = {
 			isa = PBXGroup;
 			children = (
+				2AE4C87F24E594F600825370 /* Router */,
+				2AE4C87E24E594F000825370 /* Presenter */,
+				2AE4C87D24E594EB00825370 /* View */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -196,24 +216,16 @@
 			isa = PBXGroup;
 			children = (
 				2A686A0024E2796800E7BD16 /* Response */,
-				2A6869FF24E2796100E7BD16 /* Network */,
 				2A686A0524E27E0800E7BD16 /* RemoteDataSource.swift */,
 			);
 			path = Remote;
 			sourceTree = "<group>";
 		};
-		2A6869FF24E2796100E7BD16 /* Network */ = {
-			isa = PBXGroup;
-			children = (
-				2A686A0324E27BF400E7BD16 /* ApiResponse.swift */,
-			);
-			path = Network;
-			sourceTree = "<group>";
-		};
 		2A686A0024E2796800E7BD16 /* Response */ = {
 			isa = PBXGroup;
 			children = (
-				2A686A0124E2797F00E7BD16 /* MealsResponse.swift */,
+				2A686A0124E2797F00E7BD16 /* CategoriesResponse.swift */,
+				2AE4C88824E6480800825370 /* MealsResponse.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -221,7 +233,8 @@
 		2A686A1124E2845900E7BD16 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				2A686A1224E2846D00E7BD16 /* Meal.swift */,
+				2A686A1224E2846D00E7BD16 /* CategoryModel.swift */,
+				2AE4C88A24E6490D00825370 /* MealModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -229,7 +242,8 @@
 		2A686A1424E285C200E7BD16 /* Usecase */ = {
 			isa = PBXGroup;
 			children = (
-				2A686A1524E285EE00E7BD16 /* HomeInteractor.swift */,
+				2AE4C88524E5963700825370 /* Detail */,
+				2AE4C88424E5963300825370 /* Home */,
 			);
 			path = Usecase;
 			sourceTree = "<group>";
@@ -237,10 +251,8 @@
 		2A686A1B24E28ADD00E7BD16 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				2A686A3824E52EFF00E7BD16 /* ActivityIndicator.swift */,
-				2A686A1C24E28AEC00E7BD16 /* APICall.swift */,
-				2A686A3E24E53C0300E7BD16 /* CustomeError.swift */,
-				2A686A3C24E53A9B00E7BD16 /* AsyncImage.swift */,
+				2AE4C89024E6661200825370 /* Network */,
+				2AE4C88F24E6660D00825370 /* View */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -248,7 +260,7 @@
 		2A686A2024E38A2300E7BD16 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				2A686A0F24E2842400E7BD16 /* HomeCell.swift */,
+				2A686A0F24E2842400E7BD16 /* CategoryRow.swift */,
 				2A686A0D24E283DB00E7BD16 /* HomeView.swift */,
 			);
 			path = View;
@@ -278,6 +290,81 @@
 			path = DI;
 			sourceTree = "<group>";
 		};
+		2AE4C87D24E594EB00825370 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2AE4C88024E5950200825370 /* DetailView.swift */,
+				2AE4C88D24E64BC900825370 /* MealRow.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2AE4C87E24E594F000825370 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				2AE4C88224E5951700825370 /* DetailPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		2AE4C87F24E594F600825370 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		2AE4C88424E5963300825370 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				2A686A1524E285EE00E7BD16 /* HomeInteractor.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		2AE4C88524E5963700825370 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				2AE4C88624E5964600825370 /* DetailInteractor.swift */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		2AE4C88F24E6660D00825370 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2A686A3824E52EFF00E7BD16 /* ActivityIndicator.swift */,
+				2AE4C89124E6662900825370 /* BlurView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2AE4C89024E6661200825370 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				2A686A1C24E28AEC00E7BD16 /* APICall.swift */,
+				2A686A3E24E53C0300E7BD16 /* CustomeError.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		7EB89E0F47BB5D57CA04E780 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EF740A8A1B3BD3133C99C4D1 /* Pods_MealsApps.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A872F3387C4C3FD8F1308BBE /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E5B25AC9E9849FED69F0FB0C /* Pods-MealsApps.debug.xcconfig */,
+				130ACBB0F15D7DBB79F8F5E9 /* Pods-MealsApps.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -285,10 +372,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2A6869F224E278DF00E7BD16 /* Build configuration list for PBXNativeTarget "MealsApps" */;
 			buildPhases = (
+				3D9C1C10A9CFA62038F33579 /* [CP] Check Pods Manifest.lock */,
 				2A6869DA24E278DD00E7BD16 /* Sources */,
 				2A6869DB24E278DD00E7BD16 /* Frameworks */,
 				2A6869DC24E278DD00E7BD16 /* Resources */,
 				2A686A0A24E2828B00E7BD16 /* SwiftLint */,
+				FFF3FD37B68A079ACCB697B0 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -365,6 +454,45 @@
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
+		3D9C1C10A9CFA62038F33579 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MealsApps-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FFF3FD37B68A079ACCB697B0 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MealsApps/Pods-MealsApps-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MealsApps/Pods-MealsApps-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MealsApps/Pods-MealsApps-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -372,11 +500,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2A686A0224E2797F00E7BD16 /* MealsResponse.swift in Sources */,
+				2A686A0224E2797F00E7BD16 /* CategoriesResponse.swift in Sources */,
 				2A686A1824E2868300E7BD16 /* MealRepository.swift in Sources */,
+				2AE4C88E24E64BC900825370 /* MealRow.swift in Sources */,
 				2A686A1D24E28AEC00E7BD16 /* APICall.swift in Sources */,
-				2A686A1024E2842400E7BD16 /* HomeCell.swift in Sources */,
-				2A686A3D24E53A9B00E7BD16 /* AsyncImage.swift in Sources */,
+				2AE4C88324E5951700825370 /* DetailPresenter.swift in Sources */,
+				2A686A1024E2842400E7BD16 /* CategoryRow.swift in Sources */,
 				2A686A3024E3D8C500E7BD16 /* HomeRouter.swift in Sources */,
 				2A686A1A24E288DC00E7BD16 /* HomePresenter.swift in Sources */,
 				2A686A3624E3DCF600E7BD16 /* LocaleDataSource.swift in Sources */,
@@ -385,12 +514,16 @@
 				2A686A3F24E53C0300E7BD16 /* CustomeError.swift in Sources */,
 				2A686A0624E27E0800E7BD16 /* RemoteDataSource.swift in Sources */,
 				2A6869E224E278DD00E7BD16 /* AppDelegate.swift in Sources */,
-				2A686A1324E2846D00E7BD16 /* Meal.swift in Sources */,
+				2A686A1324E2846D00E7BD16 /* CategoryModel.swift in Sources */,
+				2AE4C88B24E6490D00825370 /* MealModel.swift in Sources */,
 				2A686A3424E3DBD600E7BD16 /* MealBuilder.swift in Sources */,
+				2AE4C89224E6662900825370 /* BlurView.swift in Sources */,
 				2A6869E424E278DD00E7BD16 /* SceneDelegate.swift in Sources */,
-				2A686A0424E27BF400E7BD16 /* ApiResponse.swift in Sources */,
+				2AE4C88124E5950200825370 /* DetailView.swift in Sources */,
+				2AE4C88724E5964600825370 /* DetailInteractor.swift in Sources */,
 				2A6869E624E278DD00E7BD16 /* ContentView.swift in Sources */,
 				2A686A3924E52EFF00E7BD16 /* ActivityIndicator.swift in Sources */,
+				2AE4C88924E6480800825370 /* MealsResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -524,6 +657,7 @@
 		};
 		2A6869F324E278DF00E7BD16 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E5B25AC9E9849FED69F0FB0C /* Pods-MealsApps.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -543,6 +677,7 @@
 		};
 		2A6869F424E278DF00E7BD16 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 130ACBB0F15D7DBB79F8F5E9 /* Pods-MealsApps.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

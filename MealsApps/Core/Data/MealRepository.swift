@@ -9,12 +9,11 @@
 import Foundation
 
 protocol MealRepositorProtocol {
-    func getMeals(result: @escaping (Result<[Meal], Error>) -> Void)
+    func getCategories(result: @escaping (Result<[CategoryModel], Error>) -> Void)
+    func getMealsByTitle(title: String, result: @escaping (Result<[MealModel], Error>) -> Void)
 }
 
 class MealRepository: MealRepositorProtocol {
-    private var meals: [Meal] = []
-
     var remote: RemoteDataSourceProtocol?
     var locale: LocaleDataSourceProtocol?
 
@@ -23,16 +22,36 @@ class MealRepository: MealRepositorProtocol {
         self.remote = remote
     }
 
-    func getMeals(result: @escaping (Result<[Meal], Error>) -> Void) {
-        remote?.getMeals { responses in
+    func getCategories(result: @escaping (Result<[CategoryModel], Error>) -> Void) {
+        remote?.getCategories { responses in
             switch responses {
-            case .success(let meals):
-                for meal in meals {
-                    if let id = meal.id, let title = meal.title, let image = meal.image, let description = meal.description {
-                        self.meals.append(Meal(id: id, title: title, image: image, description: description))
-                        result(.success(self.meals))
+            case .success(let results):
+                var categories: [CategoryModel] = []
+
+                for category in results {
+                    if let id = category.id, let title = category.title, let image = category.image, let description = category.description {
+                        categories.append(CategoryModel(id: id, title: title, image: image, description: description))
                     }
                 }
+                result(.success(categories))
+            case .failure(let error):
+                result(.failure(error))
+            }
+        }
+    }
+
+    func getMealsByTitle(title: String, result: @escaping (Result<[MealModel], Error>) -> Void) {
+        remote?.getMealsByTitle(title: title) { responses in
+            switch responses {
+            case .success(let results):
+                var meals: [MealModel] = []
+
+                for meal in results {
+                    if let id = meal.id, let title = meal.title, let image = meal.image {
+                        meals.append(MealModel(id: id, title: title, image: image))
+                    }
+                }
+                result(.success(meals))
             case .failure(let error):
                 result(.failure(error))
             }

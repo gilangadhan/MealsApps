@@ -8,17 +8,29 @@
 
 import Foundation
 
+enum MealsView {
+    case home, detail
+}
+
 class MealBuilder {
 
-    class func buildModule() -> HomePresenter {
+    class func buildModule(view: MealsView) -> Any {
 
         let locale = LocaleDataSource()
         let remote = RemoteDataSource()
         let repository = MealRepository(locale: locale, remote: remote)
-        let interactor = HomeInteractor(repository: repository)
-        let presenter = HomePresenter(interactor: interactor)
 
-        interactor.presenter = presenter
-        return presenter
+        switch view {
+        case .home:
+            let interactor = HomeInteractor(repository: repository)
+            let presenter = HomePresenter(interactor: interactor)
+            interactor.presenter = presenter
+            return presenter
+        case .detail:
+            let interactor = DetailInteractor(repository: repository)
+            let presenter = DetailPresenter(interactor: interactor)
+            interactor.presenter = presenter
+            return presenter
+        }
     }
 }
