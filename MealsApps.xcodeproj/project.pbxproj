@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -39,11 +39,10 @@
 		2AE4C89924E6777300825370 /* MealPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE4C89824E6777300825370 /* MealPresenter.swift */; };
 		2AE4C89D24E69C1200825370 /* MealInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE4C89C24E69C1100825370 /* MealInteractor.swift */; };
 		2AE4C89F24EB876F00825370 /* DetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE4C89E24EB876F00825370 /* DetailRouter.swift */; };
-		5EED440B08814CE131513506 /* Pods_MealsApps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF740A8A1B3BD3133C99C4D1 /* Pods_MealsApps.framework */; };
+		2AE4C8A424EBABFA00825370 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 2AE4C8A324EBABFA00825370 /* SwiftPackageProductDependency */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		130ACBB0F15D7DBB79F8F5E9 /* Pods-MealsApps.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MealsApps.release.xcconfig"; path = "Target Support Files/Pods-MealsApps/Pods-MealsApps.release.xcconfig"; sourceTree = "<group>"; };
 		2A6869DE24E278DD00E7BD16 /* MealsApps.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MealsApps.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A6869E124E278DD00E7BD16 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2A6869E324E278DD00E7BD16 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -78,8 +77,6 @@
 		2AE4C89824E6777300825370 /* MealPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealPresenter.swift; sourceTree = "<group>"; };
 		2AE4C89C24E69C1100825370 /* MealInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealInteractor.swift; sourceTree = "<group>"; };
 		2AE4C89E24EB876F00825370 /* DetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRouter.swift; sourceTree = "<group>"; };
-		E5B25AC9E9849FED69F0FB0C /* Pods-MealsApps.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MealsApps.debug.xcconfig"; path = "Target Support Files/Pods-MealsApps/Pods-MealsApps.debug.xcconfig"; sourceTree = "<group>"; };
-		EF740A8A1B3BD3133C99C4D1 /* Pods_MealsApps.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MealsApps.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,7 +84,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5EED440B08814CE131513506 /* Pods_MealsApps.framework in Frameworks */,
+				2AE4C8A424EBABFA00825370 /* BuildFile in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -101,7 +98,6 @@
 				2A6869E024E278DD00E7BD16 /* MealsApps */,
 				2A6869DF24E278DD00E7BD16 /* Products */,
 				A872F3387C4C3FD8F1308BBE /* Pods */,
-				7EB89E0F47BB5D57CA04E780 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -400,19 +396,9 @@
 			path = Meal;
 			sourceTree = "<group>";
 		};
-		7EB89E0F47BB5D57CA04E780 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				EF740A8A1B3BD3133C99C4D1 /* Pods_MealsApps.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		A872F3387C4C3FD8F1308BBE /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				E5B25AC9E9849FED69F0FB0C /* Pods-MealsApps.debug.xcconfig */,
-				130ACBB0F15D7DBB79F8F5E9 /* Pods-MealsApps.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -424,18 +410,19 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2A6869F224E278DF00E7BD16 /* Build configuration list for PBXNativeTarget "MealsApps" */;
 			buildPhases = (
-				3D9C1C10A9CFA62038F33579 /* [CP] Check Pods Manifest.lock */,
 				2A6869DA24E278DD00E7BD16 /* Sources */,
 				2A6869DB24E278DD00E7BD16 /* Frameworks */,
 				2A6869DC24E278DD00E7BD16 /* Resources */,
 				2A686A0A24E2828B00E7BD16 /* SwiftLint */,
-				FFF3FD37B68A079ACCB697B0 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = MealsApps;
+			packageProductDependencies = (
+				2AE4C8A324EBABFA00825370 /* SwiftPackageProductDependency */,
+			);
 			productName = MealsApps;
 			productReference = 2A6869DE24E278DD00E7BD16 /* MealsApps.app */;
 			productType = "com.apple.product-type.application";
@@ -464,6 +451,9 @@
 				Base,
 			);
 			mainGroup = 2A6869D524E278DD00E7BD16;
+			packageReferences = (
+				2AE4C8A224EBABFA00825370 /* RemoteSwiftPackageReference */,
+			);
 			productRefGroup = 2A6869DF24E278DD00E7BD16 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -505,45 +495,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
-		};
-		3D9C1C10A9CFA62038F33579 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-MealsApps-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		FFF3FD37B68A079ACCB697B0 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MealsApps/Pods-MealsApps-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MealsApps/Pods-MealsApps-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MealsApps/Pods-MealsApps-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -713,7 +664,6 @@
 		};
 		2A6869F324E278DF00E7BD16 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E5B25AC9E9849FED69F0FB0C /* Pods-MealsApps.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -733,7 +683,6 @@
 		};
 		2A6869F424E278DF00E7BD16 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 130ACBB0F15D7DBB79F8F5E9 /* Pods-MealsApps.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -773,6 +722,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2AE4C8A224EBABFA00825370 /* RemoteSwiftPackageReference */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.5.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2AE4C8A324EBABFA00825370 /* SwiftPackageProductDependency */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2AE4C8A224EBABFA00825370 /* RemoteSwiftPackageReference */;
+			productName = SDWebImageSwiftUI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 2A6869D624E278DD00E7BD16 /* Project object */;
 }

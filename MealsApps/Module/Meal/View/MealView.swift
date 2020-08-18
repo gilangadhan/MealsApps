@@ -32,21 +32,18 @@ struct MealView: View {
                         Spacer()
 
                         VStack(alignment: .leading, spacing: 0) {
-                            Text("Instructions")
-                                .font(.system(size: 20))
-                            Text(self.presenter.meal.instructions ?? "Unknow")
-                                .font(.system(size: 15))
-
-                            Spacer()
                             Text("Ingredient")
                                 .font(.system(size: 20))
-                        }
-
-                        List {
                             ForEach(Array(presenter.meal.ingredient.enumerated()), id: \.1.self) { (index, ingredient) in
                                 Text("\(index+1). \(ingredient)")
                                     .font(.system(size: 14))
                             }
+
+                            Spacer()
+                            Text("Instructions")
+                                .font(.system(size: 20))
+                            Text(self.presenter.meal.instructions ?? "Unknow")
+                                .font(.system(size: 15))
                         }
 
                         Spacer()
