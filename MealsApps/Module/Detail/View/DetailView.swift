@@ -38,8 +38,10 @@ struct DetailView: View {
                                 HStack {
                                     ForEach(self.presenter.meals, id: \.id) { meal in
                                         ZStack {
-                                            MealRow(meal: meal)
-                                                .frame(width: 100, height: 100)
+                                            self.presenter.linkBuilder(for: meal) {
+                                                MealRow(meal: meal)
+                                                    .frame(width: 100, height: 100)
+                                            }.buttonStyle(PlainButtonStyle())
                                         }
                                     }
                                 }
@@ -48,7 +50,7 @@ struct DetailView: View {
                             Text("Description")
                                 .font(.system(size: 20))
                             Text(self.category.description)
-                            .font(.system(size: 15))
+                                .font(.system(size: 15))
                         }
                         Spacer()
                     }.padding()

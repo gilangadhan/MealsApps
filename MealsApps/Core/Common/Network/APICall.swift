@@ -21,11 +21,13 @@ enum Endpoints {
     enum Gets: Endpoint {
         case categories
         case meals
+        case meal
 
         public var url: String {
             switch self {
             case .categories: return "\(API.baseUrl)categories.php"
             case .meals: return "\(API.baseUrl)filter.php?c="
+            case .meal: return "\(API.baseUrl)lookup.php?i="
             }
         }
     }

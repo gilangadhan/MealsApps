@@ -11,6 +11,7 @@ import Foundation
 protocol RemoteDataSourceProtocol: class {
     func getCategories(result: @escaping (Result<[CategoryResponse], URLError>) -> Void)
     func getMealsByTitle(title: String, result: @escaping (Result<[MealResponse], URLError>) -> Void)
+    func getMealById(id: String, result: @escaping (Result<MealResponse, URLError>) -> Void)
 }
 
 class RemoteDataSource: RemoteDataSourceProtocol {
@@ -24,8 +25,8 @@ class RemoteDataSource: RemoteDataSourceProtocol {
             } else if let data = maybeData, let response = maybeResponse as? HTTPURLResponse, response.statusCode == 200 {
                 let decoder = JSONDecoder()
                 do {
-                    let response = try decoder.decode(CategoriesResponse.self, from: data)
-                    result(.success(response.categories))
+                    let categories = try decoder.decode(CategoriesResponse.self, from: data).categories
+                    result(.success(categories))
                 } catch {
                     result(.failure(.invalidResponse))
                 }
@@ -42,13 +43,32 @@ class RemoteDataSource: RemoteDataSourceProtocol {
             } else if let data = maybeData, let response = maybeResponse as? HTTPURLResponse, response.statusCode == 200 {
                 let decoder = JSONDecoder()
                 do {
-                    let response = try decoder.decode(MealsResponse.self, from: data)
-                    result(.success(response.meals))
+                    let meals = try decoder.decode(MealsResponse.self, from: data).meals
+                    result(.success(meals))
                 } catch {
                     result(.failure(.invalidResponse))
                 }
             }
         }
         task.resume()
+    }
+
+    func getMealById(id: String, result: @escaping (Result<MealResponse, URLError>) -> Void) {
+        guard let url = URL(string: Endpoints.Gets.meal.url + id) else { return }
+        let task = URLSession.shared.dataTask(with: url) { maybeData, maybeResponse, maybeError in
+            if maybeError != nil {
+                result(.failure(.addressUnreachable(url)))
+            } else if let data = maybeData, let response = maybeResponse as? HTTPURLResponse, response.statusCode == 200 {
+                let decoder = JSONDecoder()
+                do {
+                    let meal = try decoder.decode(MealsResponse.self, from: data).meals[0]
+                    result(.success(meal))
+                } catch {
+                    result(.failure(.invalidResponse))
+                }
+            }
+        }
+        task.resume()
+
     }
 }
