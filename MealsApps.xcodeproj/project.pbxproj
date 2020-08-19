@@ -39,7 +39,9 @@
 		2AE4C89924E6777300825370 /* MealPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE4C89824E6777300825370 /* MealPresenter.swift */; };
 		2AE4C89D24E69C1200825370 /* MealInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE4C89C24E69C1100825370 /* MealInteractor.swift */; };
 		2AE4C89F24EB876F00825370 /* DetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE4C89E24EB876F00825370 /* DetailRouter.swift */; };
-		2AE4C8A424EBABFA00825370 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 2AE4C8A324EBABFA00825370 /* SwiftPackageProductDependency */; };
+		2AE4C8A424EBABFA00825370 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 2AE4C8A324EBABFA00825370 /* SDWebImageSwiftUI */; };
+		86A8644324ECCF300041F146 /* CustomIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A8644224ECCF300041F146 /* CustomIcon.swift */; };
+		86A8644624ECD0450041F146 /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A8644524ECD0450041F146 /* Color+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,6 +79,8 @@
 		2AE4C89824E6777300825370 /* MealPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealPresenter.swift; sourceTree = "<group>"; };
 		2AE4C89C24E69C1100825370 /* MealInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealInteractor.swift; sourceTree = "<group>"; };
 		2AE4C89E24EB876F00825370 /* DetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRouter.swift; sourceTree = "<group>"; };
+		86A8644224ECCF300041F146 /* CustomIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomIcon.swift; sourceTree = "<group>"; };
+		86A8644524ECD0450041F146 /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,7 +88,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2AE4C8A424EBABFA00825370 /* BuildFile in Frameworks */,
+				2AE4C8A424EBABFA00825370 /* SDWebImageSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -254,6 +258,7 @@
 		2A686A1B24E28ADD00E7BD16 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				86A8644424ECD02F0041F146 /* Extensions */,
 				2AE4C89024E6661200825370 /* Network */,
 				2AE4C88F24E6660D00825370 /* View */,
 			);
@@ -339,6 +344,7 @@
 			children = (
 				2A686A3824E52EFF00E7BD16 /* ActivityIndicator.swift */,
 				2AE4C89124E6662900825370 /* BlurView.swift */,
+				86A8644224ECCF300041F146 /* CustomIcon.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -396,6 +402,14 @@
 			path = Meal;
 			sourceTree = "<group>";
 		};
+		86A8644424ECD02F0041F146 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				86A8644524ECD0450041F146 /* Color+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		A872F3387C4C3FD8F1308BBE /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -421,7 +435,7 @@
 			);
 			name = MealsApps;
 			packageProductDependencies = (
-				2AE4C8A324EBABFA00825370 /* SwiftPackageProductDependency */,
+				2AE4C8A324EBABFA00825370 /* SDWebImageSwiftUI */,
 			);
 			productName = MealsApps;
 			productReference = 2A6869DE24E278DD00E7BD16 /* MealsApps.app */;
@@ -452,7 +466,7 @@
 			);
 			mainGroup = 2A6869D524E278DD00E7BD16;
 			packageReferences = (
-				2AE4C8A224EBABFA00825370 /* RemoteSwiftPackageReference */,
+				2AE4C8A224EBABFA00825370 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 			);
 			productRefGroup = 2A6869DF24E278DD00E7BD16 /* Products */;
 			projectDirPath = "";
@@ -516,6 +530,7 @@
 				2A686A1A24E288DC00E7BD16 /* HomePresenter.swift in Sources */,
 				2A686A3624E3DCF600E7BD16 /* LocaleDataSource.swift in Sources */,
 				2A686A1624E285EE00E7BD16 /* HomeInteractor.swift in Sources */,
+				86A8644324ECCF300041F146 /* CustomIcon.swift in Sources */,
 				2A686A0E24E283DB00E7BD16 /* HomeView.swift in Sources */,
 				2A686A3F24E53C0300E7BD16 /* CustomeError.swift in Sources */,
 				2A686A0624E27E0800E7BD16 /* RemoteDataSource.swift in Sources */,
@@ -531,6 +546,7 @@
 				2A6869E624E278DD00E7BD16 /* ContentView.swift in Sources */,
 				2A686A3924E52EFF00E7BD16 /* ActivityIndicator.swift in Sources */,
 				2AE4C88924E6480800825370 /* MealsResponse.swift in Sources */,
+				86A8644624ECD0450041F146 /* Color+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -670,6 +686,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"MealsApps/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/MealsApps/Supporting Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -689,6 +706,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"MealsApps/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/MealsApps/Supporting Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -724,7 +742,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		2AE4C8A224EBABFA00825370 /* RemoteSwiftPackageReference */ = {
+		2AE4C8A224EBABFA00825370 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI";
 			requirement = {
@@ -735,9 +753,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		2AE4C8A324EBABFA00825370 /* SwiftPackageProductDependency */ = {
+		2AE4C8A324EBABFA00825370 /* SDWebImageSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 2AE4C8A224EBABFA00825370 /* RemoteSwiftPackageReference */;
+			package = 2AE4C8A224EBABFA00825370 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
 			productName = SDWebImageSwiftUI;
 		};
 /* End XCSwiftPackageProductDependency section */

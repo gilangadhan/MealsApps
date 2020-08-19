@@ -9,13 +9,18 @@
 import SwiftUI
 
 struct CustomIcon: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+  var imageName: String
+  var title: String
+  
+  var body: some View {
+    VStack {
+      Image(systemName: imageName)
+        .font(.system(size: 28))
+        .foregroundColor(.orange)
+      
+      Text(title)
+        .font(.caption)
+        .padding(.top, 8)
     }
-}
-
-struct CustomIcon_Previews: PreviewProvider {
-    static var previews: some View {
-        CustomIcon()
-    }
+  }
 }
