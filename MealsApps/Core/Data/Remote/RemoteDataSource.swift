@@ -15,10 +15,10 @@ protocol RemoteDataSourceProtocol: class {
 }
 
 class RemoteDataSource: RemoteDataSourceProtocol {
-
+    
     func getCategories(result: @escaping (Result<[CategoryResponse], URLError>) -> Void) {
         guard let url = URL(string: Endpoints.Gets.categories.url) else { return }
-
+        
         let task = URLSession.shared.dataTask(with: url) { maybeData, maybeResponse, maybeError in
             if maybeError != nil {
                 result(.failure(.addressUnreachable(url)))
@@ -34,7 +34,7 @@ class RemoteDataSource: RemoteDataSourceProtocol {
         }
         task.resume()
     }
-
+    
     func getMealsByTitle(title: String, result: @escaping (Result<[MealResponse], URLError>) -> Void) {
         guard let url = URL(string: Endpoints.Gets.meals.url + title) else { return }
         let task = URLSession.shared.dataTask(with: url) { maybeData, maybeResponse, maybeError in
@@ -52,7 +52,7 @@ class RemoteDataSource: RemoteDataSourceProtocol {
         }
         task.resume()
     }
-
+    
     func getMealById(id: String, result: @escaping (Result<MealResponse, URLError>) -> Void) {
         guard let url = URL(string: Endpoints.Gets.meal.url + id) else { return }
         let task = URLSession.shared.dataTask(with: url) { maybeData, maybeResponse, maybeError in
@@ -69,6 +69,6 @@ class RemoteDataSource: RemoteDataSourceProtocol {
             }
         }
         task.resume()
-
+        
     }
 }

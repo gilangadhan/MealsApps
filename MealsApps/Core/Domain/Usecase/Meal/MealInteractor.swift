@@ -14,13 +14,13 @@ protocol MealInteractorProtocol: class {
 
 class MealInteractor: MealInteractorProtocol {
     private let repository: MealRepositorProtocol
-
+    
     var presenter: MealPresenterProtocol?
-
+    
     required init(repository: MealRepositorProtocol) {
         self.repository = repository
     }
-
+    
     func getMealById(id: String) {
         repository.getMealById(id: id) { result in
             self.presenter?.interactor(self, didFetch: result)

@@ -17,12 +17,12 @@ protocol Endpoint {
 }
 
 enum Endpoints {
-
+    
     enum Gets: Endpoint {
         case categories
         case meals
         case meal
-
+        
         public var url: String {
             switch self {
             case .categories: return "\(API.baseUrl)categories.php"

@@ -17,18 +17,18 @@ protocol MealRepositorProtocol {
 class MealRepository: MealRepositorProtocol {
     var remote: RemoteDataSourceProtocol?
     var locale: LocaleDataSourceProtocol?
-
+    
     required init(locale: LocaleDataSourceProtocol, remote: RemoteDataSourceProtocol) {
         self.locale = locale
         self.remote = remote
     }
-
+    
     func getCategories(result: @escaping (Result<[CategoryModel], Error>) -> Void) {
         remote?.getCategories { responses in
             switch responses {
             case .success(let results):
                 var categories: [CategoryModel] = []
-
+                
                 for category in results {
                     if let id = category.id, let title = category.title, let image = category.image, let description = category.description {
                         categories.append(CategoryModel(id: id, title: title, image: image, description: description))
@@ -40,13 +40,13 @@ class MealRepository: MealRepositorProtocol {
             }
         }
     }
-
+    
     func getMealsByTitle(title: String, result: @escaping (Result<[MealModel], Error>) -> Void) {
         remote?.getMealsByTitle(title: title) { responses in
             switch responses {
             case .success(let results):
                 var meals: [MealModel] = []
-
+                
                 for meal in results {
                     if let id = meal.id, let title = meal.title, let image = meal.image {
                         meals.append(MealModel(id: id, title: title, image: image))
@@ -58,13 +58,13 @@ class MealRepository: MealRepositorProtocol {
             }
         }
     }
-
+    
     func getMealById(id: String, result: @escaping (Result<MealModel, Error>) -> Void) {
         remote?.getMealById(id: id) { responses in
             switch responses {
             case .success(let meal):
                 var mealModel: MealModel
-
+                
                 if let id = meal.id, let title = meal.title, let image = meal.image {
                     mealModel = MealModel(id: id,
                                           title: title,

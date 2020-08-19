@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var presenter: HomePresenter
-
+    
     var body: some View {
         NavigationView {
             HomeView(presenter: presenter)

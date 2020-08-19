@@ -16,26 +16,26 @@ class DetailPresenter: ObservableObject {
     @Published var meals: [MealModel] = []
     @Published var errorMessage: String = ""
     @Published var loadingState: Bool = false
-
+    
     private let router = DetailRouter()
-
+    
     let interactor: DetailInteractorProtocol
-
+    
     init(interactor: DetailInteractorProtocol) {
         self.interactor = interactor
     }
-
+    
     func getMealsByTitle(title: String) {
         loadingState = true
         interactor.getMealsByTitle(title: title)
     }
-
+    
     func linkBuilder<Content: View>(
         for meal: MealModel,
         @ViewBuilder content: () -> Content
     ) -> some View {
         NavigationLink(
-            destination: router.makeMealView(for: meal)) { content() }
+        destination: router.makeMealView(for: meal)) { content() }
     }
 }
 

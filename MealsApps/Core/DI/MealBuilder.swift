@@ -13,13 +13,13 @@ enum MealsView {
 }
 
 class MealBuilder {
-
+    
     class func buildModule(view: MealsView) -> Any {
-
+        
         let locale = LocaleDataSource()
         let remote = RemoteDataSource()
         let repository = MealRepository(locale: locale, remote: remote)
-
+        
         switch view {
         case .home:
             let interactor = HomeInteractor(repository: repository)

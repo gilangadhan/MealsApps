@@ -16,26 +16,26 @@ class HomePresenter: ObservableObject {
     @Published var categories: [CategoryModel] = []
     @Published var errorMessage: String = ""
     @Published var loadingState: Bool = false
-
+    
     private let router = HomeRouter()
-
+    
     let interactor: HomeInteractorProtocol
-
+    
     init(interactor: HomeInteractorProtocol) {
         self.interactor = interactor
     }
-
+    
     func getCategories() {
         loadingState = true
         interactor.getCategories()
     }
-
+    
     func linkBuilder<Content: View>(
         for category: CategoryModel,
         @ViewBuilder content: () -> Content
     ) -> some View {
         NavigationLink(
-            destination: router.makeDetailView(for: category)) { content() }
+        destination: router.makeDetailView(for: category)) { content() }
     }
 }
 

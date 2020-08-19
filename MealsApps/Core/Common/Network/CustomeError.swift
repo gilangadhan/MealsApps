@@ -11,7 +11,7 @@ import Foundation
 enum URLError: LocalizedError {
     case invalidResponse
     case addressUnreachable(URL)
-
+    
     var errorDescription: String? {
         switch self {
         case .invalidResponse:

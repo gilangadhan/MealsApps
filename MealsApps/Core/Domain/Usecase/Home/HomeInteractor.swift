@@ -14,13 +14,13 @@ protocol HomeInteractorProtocol: class {
 
 class HomeInteractor: HomeInteractorProtocol {
     private let repository: MealRepositorProtocol
-
+    
     var presenter: HomePresenterProtocol?
-
+    
     required init(repository: MealRepositorProtocol) {
         self.repository = repository
     }
-
+    
     func getCategories() {
         repository.getCategories { result in
             self.presenter?.interactor(self, didFetch: result)
