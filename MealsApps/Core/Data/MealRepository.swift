@@ -8,23 +8,30 @@
 
 import Foundation
 
-protocol MealRepositorProtocol {
+protocol MealRepositoryProtocol {
     func getCategories(result: @escaping (Result<[CategoryModel], Error>) -> Void)
     func getMealsByTitle(title: String, result: @escaping (Result<[MealModel], Error>) -> Void)
     func getMealById(id: String, result: @escaping (Result<MealModel, Error>) -> Void)
 }
 
-class MealRepository: MealRepositorProtocol {
-    var remote: RemoteDataSourceProtocol?
-    var locale: LocaleDataSourceProtocol?
-    
-    required init(locale: LocaleDataSourceProtocol, remote: RemoteDataSourceProtocol) {
+final class MealRepository: NSObject {
+    fileprivate let remote: RemoteDataSource
+    fileprivate let locale: LocaleDataSource
+
+    private init(locale: LocaleDataSource, remote: RemoteDataSource) {
         self.locale = locale
         self.remote = remote
     }
+
+    static func shared(locale: LocaleDataSource, remote: RemoteDataSource) -> MealRepository {
+        return MealRepository(locale: locale, remote: remote)
+    }
+}
+
+extension MealRepository: MealRepositoryProtocol {
     
     func getCategories(result: @escaping (Result<[CategoryModel], Error>) -> Void) {
-        remote?.getCategories { responses in
+        remote.getCategories { responses in
             switch responses {
             case .success(let results):
                 var categories: [CategoryModel] = []
@@ -42,7 +49,7 @@ class MealRepository: MealRepositorProtocol {
     }
     
     func getMealsByTitle(title: String, result: @escaping (Result<[MealModel], Error>) -> Void) {
-        remote?.getMealsByTitle(title: title) { responses in
+        remote.getMealsByTitle(title: title) { responses in
             switch responses {
             case .success(let results):
                 var meals: [MealModel] = []
@@ -60,7 +67,7 @@ class MealRepository: MealRepositorProtocol {
     }
     
     func getMealById(id: String, result: @escaping (Result<MealModel, Error>) -> Void) {
-        remote?.getMealById(id: id) { responses in
+        remote.getMealById(id: id) { responses in
             switch responses {
             case .success(let meal):
                 var mealModel: MealModel

@@ -14,7 +14,15 @@ protocol RemoteDataSourceProtocol: class {
     func getMealById(id: String, result: @escaping (Result<MealResponse, URLError>) -> Void)
 }
 
-class RemoteDataSource: RemoteDataSourceProtocol {
+final class RemoteDataSource: NSObject {
+    private override init() { }
+
+    static func shared() -> RemoteDataSource {
+        return RemoteDataSource()
+    }
+}
+
+extension RemoteDataSource: RemoteDataSourceProtocol {
     
     func getCategories(result: @escaping (Result<[CategoryResponse], URLError>) -> Void) {
         guard let url = URL(string: Endpoints.Gets.categories.url) else { return }

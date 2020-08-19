@@ -8,10 +8,6 @@
 
 import SwiftUI
 
-protocol HomePresenterProtocol: class {
-    func interactor(_ interactor: HomeInteractorProtocol, didFetch object: Result<[CategoryModel], Error>)
-}
-
 class HomePresenter: ObservableObject {
     @Published var categories: [CategoryModel] = []
     @Published var errorMessage: String = ""
@@ -19,15 +15,28 @@ class HomePresenter: ObservableObject {
     
     private let router = HomeRouter()
     
-    let interactor: HomeInteractorProtocol
+    let usecase: MealsUseCase
     
-    init(interactor: HomeInteractorProtocol) {
-        self.interactor = interactor
+    init(usecase: MealsUseCase) {
+        self.usecase = usecase
     }
     
     func getCategories() {
         loadingState = true
-        interactor.getCategories()
+        usecase.getCategories { result in
+            switch result {
+            case .success(let categories):
+                DispatchQueue.main.async {
+                    self.loadingState = false
+                    self.categories = categories
+                }
+            case .failure(let error):
+                DispatchQueue.main.async {
+                    self.loadingState = false
+                    self.errorMessage = error.localizedDescription
+                }
+            }
+        }
     }
     
     func linkBuilder<Content: View>(
@@ -36,22 +45,5 @@ class HomePresenter: ObservableObject {
     ) -> some View {
         NavigationLink(
         destination: router.makeDetailView(for: category)) { content() }
-    }
-}
-
-extension HomePresenter: HomePresenterProtocol {
-    func interactor(_ interactor: HomeInteractorProtocol, didFetch result: Result<[CategoryModel], Error>) {
-        switch result {
-        case .success(let categories):
-            DispatchQueue.main.async {
-                self.loadingState = false
-                self.categories = categories
-            }
-        case .failure(let error):
-            DispatchQueue.main.async {
-                self.loadingState = false
-                self.errorMessage = error.localizedDescription
-            }
-        }
     }
 }

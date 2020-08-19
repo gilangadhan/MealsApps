@@ -12,6 +12,14 @@ protocol LocaleDataSourceProtocol: class {
     func getMeals()
 }
 
-class LocaleDataSource: LocaleDataSourceProtocol {
+final class LocaleDataSource: NSObject {
+    private override init() { }
+
+    static func shared() -> LocaleDataSource {
+        return LocaleDataSource()
+    }
+}
+
+extension LocaleDataSource: LocaleDataSourceProtocol {
     func getMeals() {}
 }

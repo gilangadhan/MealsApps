@@ -8,10 +8,6 @@
 
 import SwiftUI
 
-protocol DetailPresenterProtocol: class {
-    func interactor(_ interactor: DetailInteractorProtocol, didFetch object: Result<[MealModel], Error>)
-}
-
 class DetailPresenter: ObservableObject {
     @Published var meals: [MealModel] = []
     @Published var errorMessage: String = ""
@@ -19,15 +15,28 @@ class DetailPresenter: ObservableObject {
     
     private let router = DetailRouter()
     
-    let interactor: DetailInteractorProtocol
+    let usecase: MealsUseCase
     
-    init(interactor: DetailInteractorProtocol) {
-        self.interactor = interactor
+    init(usecase: MealsUseCase) {
+        self.usecase = usecase
     }
     
     func getMealsByTitle(title: String) {
         loadingState = true
-        interactor.getMealsByTitle(title: title)
+        usecase.getMealsByTitle(title: title) { result in
+            switch result {
+            case .success(let meals):
+                DispatchQueue.main.async {
+                    self.loadingState = false
+                    self.meals = meals
+                }
+            case .failure(let error):
+                DispatchQueue.main.async {
+                    self.loadingState = false
+                    self.errorMessage = error.localizedDescription
+                }
+            }
+        }
     }
     
     func linkBuilder<Content: View>(
@@ -36,22 +45,5 @@ class DetailPresenter: ObservableObject {
     ) -> some View {
         NavigationLink(
         destination: router.makeMealView(for: meal)) { content() }
-    }
-}
-
-extension DetailPresenter: DetailPresenterProtocol {
-    func interactor(_ interactor: DetailInteractorProtocol, didFetch result: Result<[MealModel], Error>) {
-        switch result {
-        case .success(let meals):
-            DispatchQueue.main.async {
-                self.loadingState = false
-                self.meals = meals
-            }
-        case .failure(let error):
-            DispatchQueue.main.async {
-                self.loadingState = false
-                self.errorMessage = error.localizedDescription
-            }
-        }
     }
 }

@@ -8,40 +8,32 @@
 
 import Foundation
 
-protocol MealPresenterProtocol: class {
-    func interactor(_ interactor: MealInteractorProtocol, didFetch object: Result<MealModel, Error>)
-}
-
 class MealPresenter: ObservableObject {
     @Published var meal: MealModel
     @Published var errorMessage: String = ""
     @Published var loadingState: Bool = false
     
-    let interactor: MealInteractorProtocol
+    let usecase: MealsUseCase
     
-    init(interactor: MealInteractorProtocol, meal: MealModel) {
-        self.interactor = interactor
+    init(usecase: MealsUseCase, meal: MealModel) {
+        self.usecase = usecase
         self.meal = meal
     }
     
     func getMealById(id: String) {
         loadingState = true
-        interactor.getMealById(id: id)
-    }
-}
-
-extension MealPresenter: MealPresenterProtocol {
-    func interactor(_ interactor: MealInteractorProtocol, didFetch result: Result<MealModel, Error>) {
-        switch result {
-        case .success(let meal):
-            DispatchQueue.main.async {
-                self.loadingState = false
-                self.meal = meal
-            }
-        case .failure(let error):
-            DispatchQueue.main.async {
-                self.loadingState = false
-                self.errorMessage = error.localizedDescription
+        usecase.getMealById(id: id) { result in
+            switch result {
+            case .success(let meal):
+                DispatchQueue.main.async {
+                    self.loadingState = false
+                    self.meal = meal
+                }
+            case .failure(let error):
+                DispatchQueue.main.async {
+                    self.loadingState = false
+                    self.errorMessage = error.localizedDescription
+                }
             }
         }
     }
