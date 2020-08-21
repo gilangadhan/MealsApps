@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Alamofire
 
 protocol RemoteDataSourceProtocol: class {
     func getCategories(result: @escaping (Result<[CategoryResponse], URLError>) -> Void)
@@ -26,57 +27,46 @@ extension RemoteDataSource: RemoteDataSourceProtocol {
     
     func getCategories(result: @escaping (Result<[CategoryResponse], URLError>) -> Void) {
         guard let url = URL(string: Endpoints.Gets.categories.url) else { return }
-        
-        let task = URLSession.shared.dataTask(with: url) { maybeData, maybeResponse, maybeError in
-            if maybeError != nil {
-                result(.failure(.addressUnreachable(url)))
-            } else if let data = maybeData, let response = maybeResponse as? HTTPURLResponse, response.statusCode == 200 {
-                let decoder = JSONDecoder()
-                do {
-                    let categories = try decoder.decode(CategoriesResponse.self, from: data).categories
-                    result(.success(categories))
-                } catch {
+
+        AF.request(url)
+            .validate()
+            .responseDecodable(of: CategoriesResponse.self) { response in
+                switch response.result {
+                case .success(let value):
+                    result(.success(value.categories))
+                case .failure:
                     result(.failure(.invalidResponse))
                 }
-            }
         }
-        task.resume()
     }
     
     func getMealsByTitle(title: String, result: @escaping (Result<[MealResponse], URLError>) -> Void) {
         guard let url = URL(string: Endpoints.Gets.meals.url + title) else { return }
-        let task = URLSession.shared.dataTask(with: url) { maybeData, maybeResponse, maybeError in
-            if maybeError != nil {
-                result(.failure(.addressUnreachable(url)))
-            } else if let data = maybeData, let response = maybeResponse as? HTTPURLResponse, response.statusCode == 200 {
-                let decoder = JSONDecoder()
-                do {
-                    let meals = try decoder.decode(MealsResponse.self, from: data).meals
-                    result(.success(meals))
-                } catch {
+
+        AF.request(url)
+            .validate()
+            .responseDecodable(of: MealsResponse.self) { response in
+                switch response.result {
+                case .success(let value):
+                    result(.success(value.meals))
+                case .failure:
                     result(.failure(.invalidResponse))
                 }
-            }
         }
-        task.resume()
     }
     
     func getMealById(id: String, result: @escaping (Result<MealResponse, URLError>) -> Void) {
         guard let url = URL(string: Endpoints.Gets.meal.url + id) else { return }
-        let task = URLSession.shared.dataTask(with: url) { maybeData, maybeResponse, maybeError in
-            if maybeError != nil {
-                result(.failure(.addressUnreachable(url)))
-            } else if let data = maybeData, let response = maybeResponse as? HTTPURLResponse, response.statusCode == 200 {
-                let decoder = JSONDecoder()
-                do {
-                    let meal = try decoder.decode(MealsResponse.self, from: data).meals[0]
-                    result(.success(meal))
-                } catch {
+
+        AF.request(url)
+            .validate()
+            .responseDecodable(of: MealsResponse.self) { response in
+                switch response.result {
+                case .success(let value):
+                    result(.success(value.meals[0]))
+                case .failure:
                     result(.failure(.invalidResponse))
                 }
-            }
         }
-        task.resume()
-        
     }
 }

@@ -7,13 +7,18 @@
 //
 
 import Foundation
+import RealmSwift
 
 protocol LocaleDataSourceProtocol: class {
-    func getMeals()
+    func getCategories(result: @escaping (Result<Results<CategoryEntity>, DatabaseError>) -> Void)
+    func addCategories(categories: [CategoryModel], result: @escaping (Result<Results<CategoryEntity>, DatabaseError>) -> Void)
 }
 
 final class LocaleDataSource: NSObject {
-    private override init() { }
+    private let realm: Realm?
+    private override init() {
+        self.realm = try? Realm()
+    }
 
     static func shared() -> LocaleDataSource {
         return LocaleDataSource()
@@ -21,5 +26,37 @@ final class LocaleDataSource: NSObject {
 }
 
 extension LocaleDataSource: LocaleDataSourceProtocol {
-    func getMeals() {}
+
+    func getCategories(result: @escaping (Result<Results<CategoryEntity>, DatabaseError>) -> Void) {
+        if let realm = realm {
+            let categories: Results<CategoryEntity> = { realm.objects(CategoryEntity.self) }()
+            result(.success(categories))
+        } else {
+            result(.failure(.invalidInstance))
+        }
+    }
+
+    func addCategories(categories: [CategoryModel], result: @escaping (Result<Results<CategoryEntity>, DatabaseError>) -> Void) {
+        if let realm = realm {
+            do {
+                try realm.write {
+                    for category in categories {
+                        let newCategory = CategoryEntity()
+                        newCategory.id = category.id
+                        newCategory.title = category.title
+                        newCategory.image = category.image
+                        newCategory.desc = category.description
+
+                        realm.add(newCategory)
+                    }
+                    let categories: Results<CategoryEntity> = { realm.objects(CategoryEntity.self) }()
+                    result(.success(categories))
+                }
+            } catch {
+                result(.failure(.requestFailed))
+            }
+        } else {
+            result(.failure(.invalidInstance))
+        }
+    }
 }

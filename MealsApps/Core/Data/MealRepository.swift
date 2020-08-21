@@ -31,17 +31,31 @@ final class MealRepository: NSObject {
 extension MealRepository: MealRepositoryProtocol {
     
     func getCategories(result: @escaping (Result<[CategoryModel], Error>) -> Void) {
-        remote.getCategories { responses in
-            switch responses {
-            case .success(let results):
-                var categories: [CategoryModel] = []
-                
-                for category in results {
-                    if let id = category.id, let title = category.title, let image = category.image, let description = category.description {
-                        categories.append(CategoryModel(id: id, title: title, image: image, description: description))
+        locale.getCategories { localeEntities in
+            switch localeEntities {
+            case .success(let categoryEntity):
+                let categoryList = DataMapper.mapCategoryEntitiesToDomain(input: categoryEntity)
+                if categoryList.isEmpty {
+                    self.remote.getCategories { remoteResponses in
+                        switch remoteResponses {
+                        case .success(let categoryResponse):
+                            let categoryModel = DataMapper.mapCategoryResponseToDomain(input: categoryResponse)
+                            self.locale.addCategories(categories: categoryModel) { addState in
+                                switch addState {
+                                case .success(let resultFromAdd):
+                                    let resultList = DataMapper.mapCategoryEntitiesToDomain(input: resultFromAdd)
+                                    result(.success(resultList))
+                                case .failure(let error):
+                                    result(.failure(error))
+                                }
+                            }
+                        case .failure(let error):
+                            result(.failure(error))
+                        }
                     }
+                } else {
+                    result(.success(categoryList))
                 }
-                result(.success(categories))
             case .failure(let error):
                 result(.failure(error))
             }

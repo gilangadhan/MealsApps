@@ -19,4 +19,5 @@ struct MealModel: Equatable, Identifiable {
     var youtube: String? = ""
     var source: String? = ""
     var ingredient: [String] = []
+    var favorite: Bool = false
 }
