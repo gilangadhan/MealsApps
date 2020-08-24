@@ -1,30 +1,28 @@
 //
-//  DetailPresenter.swift
+//  FavoritePresenter.swift
 //  MealsApps
 //
-//  Created by Gilang Ramadhan on 13/08/20.
+//  Created by Gilang Ramadhan on 24/08/20.
 //  Copyright © 2020 Dicoding Indonesia. All rights reserved.
 //
 
 import SwiftUI
 
-class DetailPresenter: ObservableObject {
-    private let router = DetailRouter()
-    private let detailUseCase: DetailUseCase
+class FavoritePresenter: ObservableObject {
+    private let router = FavoriteRouter()
+    private let favoriteUseCase: FavoriteUseCase
 
     @Published var meals: [MealModel] = []
-    @Published var category: CategoryModel
     @Published var errorMessage: String = ""
     @Published var loadingState: Bool = false
-    
-    init(detailUseCase: DetailUseCase) {
-        self.detailUseCase = detailUseCase
-        category = detailUseCase.getCategory()
+
+    init(favoriteUseCase: FavoriteUseCase) {
+        self.favoriteUseCase = favoriteUseCase
     }
-    
-    func getMealsByCategory() {
+
+    func getFavoriteMeals() {
         loadingState = true
-        detailUseCase.getMealsByCategory { result in
+        favoriteUseCase.getFavoriteMeals { result in
             switch result {
             case .success(let meals):
                 DispatchQueue.main.async {
@@ -39,7 +37,7 @@ class DetailPresenter: ObservableObject {
             }
         }
     }
-    
+
     func linkBuilder<Content: View>(
         for meal: MealModel,
         @ViewBuilder content: () -> Content

@@ -27,7 +27,7 @@ struct MealView: View {
             }
         }.onAppear {
             if !(self.presenter.meal.ingredients.count > 0) {
-                self.presenter.getMealById(id: self.presenter.meal.id)
+                self.presenter.getMealById()
             }
         }.alert(isPresented: $showingAlert) {
             Alert(title: Text("Oops!"), message: Text("Something wrong!"), dismissButton: .default(Text("OK")))
@@ -57,7 +57,13 @@ extension MealView {
                     self.openUrl(self.presenter.meal.youtube ?? "")
             }
             Spacer()
-            CustomIcon(imageName: "heart", title: "Favorite")
+            if presenter.meal.favorite {
+                CustomIcon(imageName: "heart.fill", title: "Favorited")
+                    .onTapGesture { self.presenter.updateFavoriteMeal() }
+            } else {
+                CustomIcon(imageName: "heart", title: "Favorite")
+                    .onTapGesture { self.presenter.updateFavoriteMeal() }
+            }
             Spacer()
         }.padding()
     }

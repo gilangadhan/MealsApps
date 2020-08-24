@@ -12,6 +12,8 @@ protocol MealRepositoryProtocol {
     func getCategories(result: @escaping (Result<[CategoryModel], Error>) -> Void)
     func getMealsByCategory(category: String, result: @escaping (Result<[MealModel], Error>) -> Void)
     func getMealById(id: String, result: @escaping (Result<MealModel, Error>) -> Void)
+    func getFavoriteMeals(result: @escaping (Result<[MealModel], Error>) -> Void)
+    func updateFavoriteMeal(idMeal: String, result: @escaping (Result<MealModel, Error>) -> Void)
 }
 
 final class MealRepository: NSObject {
@@ -31,8 +33,8 @@ final class MealRepository: NSObject {
 extension MealRepository: MealRepositoryProtocol {
     
     func getCategories(result: @escaping (Result<[CategoryModel], Error>) -> Void) {
-        locale.getCategories { localeEntities in
-            switch localeEntities {
+        locale.getCategories { localeResponses in
+            switch localeResponses {
             case .success(let categoryEntity):
                 let categoryList = DataMapper.mapCategoryEntitiesToDomains(input: categoryEntity)
                 if categoryList.isEmpty {
@@ -65,8 +67,8 @@ extension MealRepository: MealRepositoryProtocol {
     }
     
     func getMealsByCategory(category: String, result: @escaping (Result<[MealModel], Error>) -> Void) {
-        locale.getMealsByCategory(category: category) { localeEntities in
-            switch localeEntities {
+        locale.getMealsByCategory(category: category) { localeResponses in
+            switch localeResponses {
             case .success(let mealsEntity):
                 let mealList = DataMapper.mapMealEntitiesToDomains(input: mealsEntity)
                 if mealList.isEmpty {
@@ -97,8 +99,8 @@ extension MealRepository: MealRepositoryProtocol {
     }
     
     func getMealById(id: String, result: @escaping (Result<MealModel, Error>) -> Void) {
-        locale.getMealsById(id: id) { localeEntity in
-            switch localeEntity {
+        locale.getMealsById(id: id) { localeResponse in
+            switch localeResponse {
             case .success(let mealEntity):
                 let mealModel = DataMapper.mapDetailMealEntityToDomain(input: mealEntity)
                 if mealModel.ingredients.isEmpty {
@@ -122,6 +124,30 @@ extension MealRepository: MealRepositoryProtocol {
                 } else {
                     result(.success(mealModel))
                 }
+            case .failure(let error):
+                result(.failure(error))
+            }
+        }
+    }
+
+    func getFavoriteMeals(result: @escaping (Result<[MealModel], Error>) -> Void) {
+        locale.getFavoriteMeals { localeResponse in
+            switch localeResponse {
+            case .success(let localeEntities):
+                let resultMeals = DataMapper.mapMealEntitiesToDomains(input: localeEntities)
+                result(.success(resultMeals))
+            case .failure(let error):
+                result(.failure(error))
+            }
+        }
+    }
+
+    func updateFavoriteMeal(idMeal: String, result: @escaping (Result<MealModel, Error>) -> Void) {
+        locale.updateFavoriteMeal(idMeal: idMeal) { localeResponse in
+            switch localeResponse {
+            case .success(let localeEntity):
+                let resultMeal = DataMapper.mapDetailMealEntityToDomain(input: localeEntity)
+                result(.success(resultMeal))
             case .failure(let error):
                 result(.failure(error))
             }

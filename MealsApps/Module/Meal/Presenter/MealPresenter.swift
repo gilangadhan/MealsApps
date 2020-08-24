@@ -13,16 +13,33 @@ class MealPresenter: ObservableObject {
     @Published var errorMessage: String = ""
     @Published var loadingState: Bool = false
     
-    let interactor: MealUseCase
+    let mealUseCase: MealUseCase
     
-    init(interactor: MealUseCase) {
-        self.interactor = interactor
-        meal = interactor.getMeal()
+    init(mealUseCase: MealUseCase) {
+        self.mealUseCase = mealUseCase
+        meal = mealUseCase.getMeal()
     }
     
-    func getMealById(id: String) {
+    func getMealById() {
         loadingState = true
-        interactor.getMealById { result in
+        mealUseCase.getMealById { result in
+            switch result {
+            case .success(let meal):
+                DispatchQueue.main.async {
+                    self.loadingState = false
+                    self.meal = meal
+                }
+            case .failure(let error):
+                DispatchQueue.main.async {
+                    self.loadingState = false
+                    self.errorMessage = error.localizedDescription
+                }
+            }
+        }
+    }
+
+    func updateFavoriteMeal() {
+        mealUseCase.updateFavoriteMeal { result in
             switch result {
             case .success(let meal):
                 DispatchQueue.main.async {

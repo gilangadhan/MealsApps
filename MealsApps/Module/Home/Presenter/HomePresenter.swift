@@ -15,15 +15,15 @@ class HomePresenter: ObservableObject {
     
     private let router = HomeRouter()
     
-    let interactor: HomeUseCase
+    let homeUseCase: HomeUseCase
     
-    init(interactor: HomeUseCase) {
-        self.interactor = interactor
+    init(homeUseCase: HomeUseCase) {
+        self.homeUseCase = homeUseCase
     }
     
     func getCategories() {
         loadingState = true
-        interactor.getCategories { result in
+        homeUseCase.getCategories { result in
             switch result {
             case .success(let categories):
                 DispatchQueue.main.async {

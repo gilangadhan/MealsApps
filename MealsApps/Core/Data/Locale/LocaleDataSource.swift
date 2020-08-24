@@ -156,6 +156,32 @@ extension LocaleDataSource: LocaleDataSourceProtocol {
             result(.failure(.invalidInstance))
         }
     }
+
+    func updateFavoriteMeal(idMeal: String, result: @escaping (Result<MealEntity, DatabaseError>) -> Void) {
+        if let realm = realm, let mealEntity = { realm.objects(MealEntity.self).filter("id = '\(idMeal)'") }().first {
+            do {
+                try realm.write {
+                    print(mealEntity)
+                    mealEntity.setValue(!mealEntity.favorite, forKey: "favorite")
+                    result(.success(mealEntity))
+                }
+            } catch {
+                result(.failure(.requestFailed))
+            }
+        } else {
+            result(.failure(.invalidInstance))
+        }
+    }
+
+    func getFavoriteMeals(result: @escaping (Result<[MealEntity], DatabaseError>) -> Void) {
+        if let realm = realm {
+            let mealEntities = { realm.objects(MealEntity.self).filter("favorite = \(true)") }()
+            result(.success(mealEntities.toArray(ofType: MealEntity.self)))
+        } else {
+            result(.failure(.invalidInstance))
+        }
+    }
+
 }
 
 extension Results {

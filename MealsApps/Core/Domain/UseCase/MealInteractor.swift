@@ -11,6 +11,7 @@ import Foundation
 protocol MealUseCase {
     func getMealById(completion: @escaping (Result<MealModel, Error>) -> Void)
     func getMeal() -> MealModel
+    func updateFavoriteMeal(completion: @escaping (Result<MealModel, Error>) -> Void)
 }
 
 class MealInteractor: MealUseCase {
@@ -30,5 +31,11 @@ class MealInteractor: MealUseCase {
 
     func getMeal() -> MealModel {
         return meal
+    }
+
+    func updateFavoriteMeal(completion: @escaping (Result<MealModel, Error>) -> Void) {
+        repository.updateFavoriteMeal(idMeal: meal.id) { result in
+            completion(result)
+        }
     }
 }

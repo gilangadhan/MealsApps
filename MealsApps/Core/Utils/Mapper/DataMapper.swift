@@ -126,8 +126,8 @@ final class DataMapper {
             .map { "\($0) \($1)" }
         for (index, ingredient) in ingredientStrings.enumerated() {
             let ingredientEntity = IngredientEntity()
-            ingredientEntity.id = "\(index)"
-            ingredientEntity.title = "\(index). \(ingredient)"
+            ingredientEntity.id = "\(index+1)"
+            ingredientEntity.title = "\(index+1). \(ingredient)"
             ingredientEntity.mealId = mealId
             ingredientEntities.append(ingredientEntity)
         }

@@ -35,6 +35,11 @@
 		2A97A09724F3768600828603 /* HomeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A97A09624F3768600828603 /* HomeInteractor.swift */; };
 		2A97A09924F3769300828603 /* DetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A97A09824F3769300828603 /* DetailInteractor.swift */; };
 		2A97A09B24F3769F00828603 /* MealInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A97A09A24F3769F00828603 /* MealInteractor.swift */; };
+		2A97A0A024F3C7B000828603 /* FavoriteInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A97A09F24F3C7B000828603 /* FavoriteInteractor.swift */; };
+		2A97A0A524F3CCBF00828603 /* FavoritePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A97A0A424F3CCBF00828603 /* FavoritePresenter.swift */; };
+		2A97A0A724F3CCE700828603 /* FavoriteRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A97A0A624F3CCE700828603 /* FavoriteRouter.swift */; };
+		2A97A0A924F3CD1100828603 /* FavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A97A0A824F3CD1000828603 /* FavoriteView.swift */; };
+		2A97A0AB24F3CDA000828603 /* FavoriteRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A97A0AA24F3CDA000828603 /* FavoriteRow.swift */; };
 		2A9DD91C24EF764F0071F9CA /* CategoryEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9DD91B24EF764F0071F9CA /* CategoryEntity.swift */; };
 		2A9DD91F24EF76C70071F9CA /* MealEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9DD91E24EF76C70071F9CA /* MealEntity.swift */; };
 		2A9DD92224EF898E0071F9CA /* DataMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9DD92124EF898E0071F9CA /* DataMapper.swift */; };
@@ -80,6 +85,11 @@
 		2A97A09624F3768600828603 /* HomeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeInteractor.swift; sourceTree = "<group>"; };
 		2A97A09824F3769300828603 /* DetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInteractor.swift; sourceTree = "<group>"; };
 		2A97A09A24F3769F00828603 /* MealInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealInteractor.swift; sourceTree = "<group>"; };
+		2A97A09F24F3C7B000828603 /* FavoriteInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteInteractor.swift; sourceTree = "<group>"; };
+		2A97A0A424F3CCBF00828603 /* FavoritePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePresenter.swift; sourceTree = "<group>"; };
+		2A97A0A624F3CCE700828603 /* FavoriteRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRouter.swift; sourceTree = "<group>"; };
+		2A97A0A824F3CD1000828603 /* FavoriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteView.swift; sourceTree = "<group>"; };
+		2A97A0AA24F3CDA000828603 /* FavoriteRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRow.swift; sourceTree = "<group>"; };
 		2A9DD91B24EF764F0071F9CA /* CategoryEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryEntity.swift; sourceTree = "<group>"; };
 		2A9DD91E24EF76C70071F9CA /* MealEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealEntity.swift; sourceTree = "<group>"; };
 		2A9DD92124EF898E0071F9CA /* DataMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataMapper.swift; sourceTree = "<group>"; };
@@ -183,8 +193,8 @@
 		2A6869F824E2791A00E7BD16 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				2A686A2324E38A4800E7BD16 /* Router */,
 				2A686A2124E38A2B00E7BD16 /* Presenter */,
+				2A686A2324E38A4800E7BD16 /* Router */,
 				2A686A2024E38A2300E7BD16 /* View */,
 			);
 			path = Home;
@@ -193,8 +203,8 @@
 		2A6869F924E2792300E7BD16 /* Detail */ = {
 			isa = PBXGroup;
 			children = (
-				2AE4C87F24E594F600825370 /* Router */,
 				2AE4C87E24E594F000825370 /* Presenter */,
+				2AE4C87F24E594F600825370 /* Router */,
 				2AE4C87D24E594EB00825370 /* View */,
 			);
 			path = Detail;
@@ -203,6 +213,9 @@
 		2A6869FA24E2792700E7BD16 /* Favorite */ = {
 			isa = PBXGroup;
 			children = (
+				2A97A0A224F3CC9F00828603 /* Presenter */,
+				2A97A0A124F3CC9000828603 /* Router */,
+				2A97A0A324F3CCAC00828603 /* View */,
 			);
 			path = Favorite;
 			sourceTree = "<group>";
@@ -221,7 +234,7 @@
 			isa = PBXGroup;
 			children = (
 				2A686A1124E2845900E7BD16 /* Model */,
-				2A686A1424E285C200E7BD16 /* Usecase */,
+				2A686A1424E285C200E7BD16 /* UseCase */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -263,14 +276,15 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		2A686A1424E285C200E7BD16 /* Usecase */ = {
+		2A686A1424E285C200E7BD16 /* UseCase */ = {
 			isa = PBXGroup;
 			children = (
 				2A97A09624F3768600828603 /* HomeInteractor.swift */,
 				2A97A09824F3769300828603 /* DetailInteractor.swift */,
+				2A97A09F24F3C7B000828603 /* FavoriteInteractor.swift */,
 				2A97A09A24F3769F00828603 /* MealInteractor.swift */,
 			);
-			path = Usecase;
+			path = UseCase;
 			sourceTree = "<group>";
 		};
 		2A686A1B24E28ADD00E7BD16 /* Utils */ = {
@@ -315,6 +329,31 @@
 				2A686A3324E3DBD600E7BD16 /* Injection.swift */,
 			);
 			path = DI;
+			sourceTree = "<group>";
+		};
+		2A97A0A124F3CC9000828603 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				2A97A0A624F3CCE700828603 /* FavoriteRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		2A97A0A224F3CC9F00828603 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				2A97A0A424F3CCBF00828603 /* FavoritePresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		2A97A0A324F3CCAC00828603 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2A97A0A824F3CD1000828603 /* FavoriteView.swift */,
+				2A97A0AA24F3CDA000828603 /* FavoriteRow.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		2A9DD91D24EF76840071F9CA /* Entity */ = {
@@ -539,6 +578,7 @@
 				2A686A1824E2868300E7BD16 /* MealRepository.swift in Sources */,
 				2AE4C88E24E64BC900825370 /* MealRow.swift in Sources */,
 				2AE4C89924E6777300825370 /* MealPresenter.swift in Sources */,
+				2A97A0AB24F3CDA000828603 /* FavoriteRow.swift in Sources */,
 				2A9DD91C24EF764F0071F9CA /* CategoryEntity.swift in Sources */,
 				2A686A1D24E28AEC00E7BD16 /* APICall.swift in Sources */,
 				2AE4C89F24EB876F00825370 /* DetailRouter.swift in Sources */,
@@ -549,6 +589,7 @@
 				2A97A09924F3769300828603 /* DetailInteractor.swift in Sources */,
 				2A686A1A24E288DC00E7BD16 /* HomePresenter.swift in Sources */,
 				2A686A3624E3DCF600E7BD16 /* LocaleDataSource.swift in Sources */,
+				2A97A0A024F3C7B000828603 /* FavoriteInteractor.swift in Sources */,
 				86A8644324ECCF300041F146 /* CustomIcon.swift in Sources */,
 				2A686A0E24E283DB00E7BD16 /* HomeView.swift in Sources */,
 				2A686A3F24E53C0300E7BD16 /* CustomeError+Ext.swift in Sources */,
@@ -559,13 +600,16 @@
 				2AE4C89524E6774500825370 /* MealView.swift in Sources */,
 				2A686A1324E2846D00E7BD16 /* CategoryModel.swift in Sources */,
 				2AE4C88B24E6490D00825370 /* MealModel.swift in Sources */,
+				2A97A0A524F3CCBF00828603 /* FavoritePresenter.swift in Sources */,
 				2A97A09324EFD07000828603 /* IngredientEntity.swift in Sources */,
 				2A686A3424E3DBD600E7BD16 /* Injection.swift in Sources */,
 				2AE4C89224E6662900825370 /* BlurView.swift in Sources */,
 				2A6869E424E278DD00E7BD16 /* SceneDelegate.swift in Sources */,
+				2A97A0A724F3CCE700828603 /* FavoriteRouter.swift in Sources */,
 				2AE4C88124E5950200825370 /* DetailView.swift in Sources */,
 				2A6869E624E278DD00E7BD16 /* ContentView.swift in Sources */,
 				2A686A3924E52EFF00E7BD16 /* ActivityIndicator.swift in Sources */,
+				2A97A0A924F3CD1100828603 /* FavoriteView.swift in Sources */,
 				2AE4C88924E6480800825370 /* MealsResponse.swift in Sources */,
 				2A97A09B24F3769F00828603 /* MealInteractor.swift in Sources */,
 				86A8644624ECD0450041F146 /* Color+Ext.swift in Sources */,
