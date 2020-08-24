@@ -19,7 +19,7 @@ struct FavoriteView: View {
                     ActivityIndicator()
                 }
             } else {
-                if presenter.meals.count = 0 {
+                if presenter.meals.count == 0 {
                     Text("Empty...")
                 } else {
                     ScrollView(.vertical, showsIndicators: false) {
