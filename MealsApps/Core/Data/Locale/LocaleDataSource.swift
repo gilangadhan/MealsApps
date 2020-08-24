@@ -102,12 +102,6 @@ extension LocaleDataSource: LocaleDataSourceProtocol {
                 return
             }
 
-            let ingredients: Results<IngredientEntity> = {
-                realm.objects(IngredientEntity.self)
-                    .filter("meal = '\(meal.id)'")
-            }()
-
-            meal.ingredients.append(objectsIn: ingredients)
             result(.success(meal))
         } else {
             result(.failure(.invalidInstance))

@@ -38,14 +38,13 @@ class DetailPresenter: ObservableObject {
                 }
             }
         }
-
     }
     
     func linkBuilder<Content: View>(
         for meal: MealModel,
         @ViewBuilder content: () -> Content
     ) -> some View {
-            NavigationLink(
-            destination: router.makeMealView(for: meal)) { content() }
+        NavigationLink(
+        destination: router.makeMealView(for: meal)) { content() }
     }
 }
