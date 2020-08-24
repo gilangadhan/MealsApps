@@ -9,21 +9,22 @@
 import SwiftUI
 
 class DetailPresenter: ObservableObject {
+    private let router = DetailRouter()
+    private let interactor: DetailUseCase
+
     @Published var meals: [MealModel] = []
+    @Published var category: CategoryModel
     @Published var errorMessage: String = ""
     @Published var loadingState: Bool = false
     
-    private let router = DetailRouter()
-    
-    let usecase: MealsUseCase
-    
-    init(usecase: MealsUseCase) {
-        self.usecase = usecase
+    init(interactor: DetailUseCase) {
+        self.interactor = interactor
+        category = interactor.getCategory()
     }
     
-    func getMealsByCategory(category: String) {
+    func getMealsByCategory() {
         loadingState = true
-        usecase.getMealsByCategory(category: category) { result in
+        interactor.getMealsByCategory { result in
             switch result {
             case .success(let meals):
                 DispatchQueue.main.async {
@@ -37,13 +38,14 @@ class DetailPresenter: ObservableObject {
                 }
             }
         }
+
     }
     
     func linkBuilder<Content: View>(
         for meal: MealModel,
         @ViewBuilder content: () -> Content
     ) -> some View {
-        NavigationLink(
-        destination: router.makeMealView(for: meal)) { content() }
+            NavigationLink(
+            destination: router.makeMealView(for: meal)) { content() }
     }
 }

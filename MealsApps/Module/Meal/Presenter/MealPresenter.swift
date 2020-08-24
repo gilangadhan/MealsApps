@@ -13,16 +13,16 @@ class MealPresenter: ObservableObject {
     @Published var errorMessage: String = ""
     @Published var loadingState: Bool = false
     
-    let usecase: MealsUseCase
+    let interactor: MealUseCase
     
-    init(usecase: MealsUseCase, meal: MealModel) {
-        self.usecase = usecase
-        self.meal = meal
+    init(interactor: MealUseCase) {
+        self.interactor = interactor
+        meal = interactor.getMeal()
     }
     
     func getMealById(id: String) {
         loadingState = true
-        usecase.getMealById(id: id) { result in
+        interactor.getMealById { result in
             switch result {
             case .success(let meal):
                 DispatchQueue.main.async {

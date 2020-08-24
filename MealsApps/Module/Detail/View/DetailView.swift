@@ -11,8 +11,7 @@ import SDWebImageSwiftUI
 
 struct DetailView: View {
     @ObservedObject var presenter: DetailPresenter
-    @State var category: CategoryModel
-    
+
     var body: some View {
         ZStack {
             if presenter.loadingState {
@@ -28,8 +27,10 @@ struct DetailView: View {
                 }
             }
         }.onAppear {
-            self.presenter.getMealsByCategory(category: self.category.title)
-        }.navigationBarTitle(Text(self.category.title), displayMode: .large)
+            if self.presenter.meals.count == 0 {
+                self.presenter.getMealsByCategory()
+            }
+        }.navigationBarTitle(Text(self.presenter.category.title), displayMode: .large)
     }
 }
 
@@ -46,7 +47,7 @@ extension DetailView {
     }
     
     var imageCategory: some View {
-        WebImage(url: URL(string: self.category.image))
+        WebImage(url: URL(string: self.presenter.category.image))
             .resizable()
             .indicator(.activity)
             .transition(.fade(duration: 0.5))
@@ -70,18 +71,18 @@ extension DetailView {
     }
     
     var description: some View {
-        Text(self.category.description)
+        Text(self.presenter.category.description)
             .font(.system(size: 15))
     }
     
     func headerTitle(_ title: String) -> some View {
-        return Text("Meals from \(self.category.title)")
+        return Text(title)
             .font(.headline)
     }
     
     var content: some View {
         VStack(alignment: .leading, spacing: 0) {
-            headerTitle("Meals from \(self.category.title)")
+            headerTitle("Meals from \(self.presenter.category.title)")
                 .padding(.bottom)
             mealsHorizontal
             spacer

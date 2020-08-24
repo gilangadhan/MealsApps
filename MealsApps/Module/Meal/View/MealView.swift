@@ -11,9 +11,7 @@ import SDWebImageSwiftUI
 
 struct MealView: View {
     @State private var showingAlert = false
-    @State private var shpwingAPIAlert = false
     @ObservedObject var presenter: MealPresenter
-
     var body: some View {
         ZStack {
             if presenter.loadingState {

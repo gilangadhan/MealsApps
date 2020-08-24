@@ -146,54 +146,6 @@
             endingLineNumber = "100"
             landmarkName = "getMealById(id:result:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "DF162A0A-D6E6-4CCC-979C-729A21E2F2F4 - ad6e1460fe845657"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "MealsApps.MealRepository.getMealById(id: Swift.String, result: (Swift.Result&lt;MealsApps.MealModel, Swift.Error&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "MealsApps"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/gilangramadhan/Documents/ProjectiOS/dicoding/Expert/MealsApps/MealsApps/Core/Data/MealRepository.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "100"
-                  endingLineNumber = "100"
-                  offsetFromSymbolStart = "52">
-               </Location>
-               <Location
-                  uuid = "DF162A0A-D6E6-4CCC-979C-729A21E2F2F4 - bde62905ac7a6762"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Result&lt;MealsApps.MealEntity, MealsApps.DatabaseError&gt;) -&gt; () in MealsApps.MealRepository.getMealById(id: Swift.String, result: (Swift.Result&lt;MealsApps.MealModel, Swift.Error&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "MealsApps"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/gilangramadhan/Documents/ProjectiOS/dicoding/Expert/MealsApps/MealsApps/Core/Data/MealRepository.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "102"
-                  endingLineNumber = "102"
-                  offsetFromSymbolStart = "414">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "39B539A4-C7E8-4D0B-9CDD-A2C619323712"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MealsApps/Module/Meal/Presenter/MealPresenter.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "20"
-            endingLineNumber = "20"
-            landmarkName = "init(usecase:meal:)"
-            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

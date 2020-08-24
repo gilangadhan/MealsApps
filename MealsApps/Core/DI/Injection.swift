@@ -16,8 +16,18 @@ final class Injection: NSObject {
         return MealRepository.shared(locale: locale, remote: remote)
     }
 
-    func provideMeals() -> MealsUseCase {
+    func provideHome() -> HomeUseCase {
         let repository = provideRepository()
-        return MealsInteractor(repository: repository)
+        return HomeInteractor(repository: repository)
+    }
+
+    func provideDetail(category: CategoryModel) -> DetailUseCase {
+        let repository = provideRepository()
+        return DetailInteractor(repository: repository, category: category)
+    }
+
+    func provideMeal(meal: MealModel) -> MealUseCase {
+        let repository = provideRepository()
+        return MealInteractor(repository: repository, meal: meal)
     }
 }

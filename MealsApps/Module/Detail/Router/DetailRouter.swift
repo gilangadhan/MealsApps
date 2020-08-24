@@ -10,8 +10,8 @@ import SwiftUI
 
 class DetailRouter {
     func makeMealView(for meal: MealModel) -> some View {
-        let usecase = Injection.init().provideMeals()
-        let presenter = MealPresenter(usecase: usecase, meal: meal)
+        let interactor = Injection.init().provideMeal(meal: meal)
+        let presenter = MealPresenter(interactor: interactor)
         return MealView(presenter: presenter)
     }
 }

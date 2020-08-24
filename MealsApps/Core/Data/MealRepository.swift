@@ -97,34 +97,34 @@ extension MealRepository: MealRepositoryProtocol {
     }
     
     func getMealById(id: String, result: @escaping (Result<MealModel, Error>) -> Void) {
-        locale.getMealsById(id: id) { localeEntity in
-            switch localeEntity {
-            case .success(let mealEntity):
-                let mealModel = DataMapper.mapDetailMealEntityToDomain(input: mealEntity)
-                if mealModel.ingredients.isEmpty {
-                    self.remote.getMealById(id: id) { remoteResponse in
-                        switch remoteResponse {
-                        case .success(let mealResponse):
-                            let mealEntity = DataMapper.mapDetailMealResponseToEntity(mealId: id, input: mealResponse)
-                            self.locale.updateMealsById(id: id, meal: mealEntity) { updateState in
-                                switch updateState {
-                                case .success(let resultFromUpdate):
-                                    let resultMeal = DataMapper.mapDetailMealEntityToDomain(input: resultFromUpdate)
-                                    result(.success(resultMeal))
-                                case .failure(let error):
-                                    result(.failure(error))
-                                }
-                            }
-                        case .failure(let error):
-                            result(.failure(error))
-                        }
-                    }
-                } else {
-                    result(.success(mealModel))
-                }
-            case .failure(let error):
-                result(.failure(error))
-            }
-        }
+//        locale.getMealsById(id: id) { localeEntity in
+//            switch localeEntity {
+//            case .success(let mealEntity):
+//                let mealModel = DataMapper.mapDetailMealEntityToDomain(input: mealEntity)
+//                if mealModel.ingredients.isEmpty {
+//                    self.remote.getMealById(id: id) { remoteResponse in
+//                        switch remoteResponse {
+//                        case .success(let mealResponse):
+//                            let mealEntity = DataMapper.mapDetailMealResponseToEntity(mealId: id, input: mealResponse)
+//                            self.locale.updateMealsById(id: id, meal: mealEntity) { updateState in
+//                                switch updateState {
+//                                case .success(let resultFromUpdate):
+//                                    let resultMeal = DataMapper.mapDetailMealEntityToDomain(input: resultFromUpdate)
+//                                    result(.success(resultMeal))
+//                                case .failure(let error):
+//                                    result(.failure(error))
+//                                }
+//                            }
+//                        case .failure(let error):
+//                            result(.failure(error))
+//                        }
+//                    }
+//                } else {
+//                    result(.success(mealModel))
+//                }
+//            case .failure(let error):
+//                result(.failure(error))
+//            }
+//        }
     }
 }
