@@ -15,8 +15,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
 
-        let interactor = Injection.init().provideHome()
-        let presenter = HomePresenter(interactor: interactor)
+        let homeUseCase = Injection.init().provideHome()
+        let presenter = HomePresenter(homeUseCase: homeUseCase)
 
         let contentView = ContentView().environmentObject(presenter)
         
