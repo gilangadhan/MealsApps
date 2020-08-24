@@ -11,7 +11,7 @@ import Alamofire
 
 protocol RemoteDataSourceProtocol: class {
     func getCategories(result: @escaping (Result<[CategoryResponse], URLError>) -> Void)
-    func getMealsByTitle(title: String, result: @escaping (Result<[MealResponse], URLError>) -> Void)
+    func getMealsByCategory(category: String, result: @escaping (Result<[MealResponse], URLError>) -> Void)
     func getMealById(id: String, result: @escaping (Result<MealResponse, URLError>) -> Void)
 }
 
@@ -40,8 +40,8 @@ extension RemoteDataSource: RemoteDataSourceProtocol {
         }
     }
     
-    func getMealsByTitle(title: String, result: @escaping (Result<[MealResponse], URLError>) -> Void) {
-        guard let url = URL(string: Endpoints.Gets.meals.url + title) else { return }
+    func getMealsByCategory(category: String, result: @escaping (Result<[MealResponse], URLError>) -> Void) {
+        guard let url = URL(string: Endpoints.Gets.meals.url + category) else { return }
 
         AF.request(url)
             .validate()

@@ -18,6 +18,6 @@ struct MealModel: Equatable, Identifiable {
     var tag: String? = ""
     var youtube: String? = ""
     var source: String? = ""
-    var ingredient: [String] = []
+    var ingredients: [IngredientModel] = []
     var favorite: Bool = false
 }

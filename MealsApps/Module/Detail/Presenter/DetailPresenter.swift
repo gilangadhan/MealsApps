@@ -21,9 +21,9 @@ class DetailPresenter: ObservableObject {
         self.usecase = usecase
     }
     
-    func getMealsByTitle(title: String) {
+    func getMealsByCategory(category: String) {
         loadingState = true
-        usecase.getMealsByTitle(title: title) { result in
+        usecase.getMealsByCategory(category: category) { result in
             switch result {
             case .success(let meals):
                 DispatchQueue.main.async {

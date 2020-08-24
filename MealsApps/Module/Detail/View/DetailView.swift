@@ -28,7 +28,7 @@ struct DetailView: View {
                 }
             }
         }.onAppear {
-            self.presenter.getMealsByTitle(title: self.category.title)
+            self.presenter.getMealsByCategory(category: self.category.title)
         }.navigationBarTitle(Text(self.category.title), displayMode: .large)
     }
 }

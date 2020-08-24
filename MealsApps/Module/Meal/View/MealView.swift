@@ -13,7 +13,7 @@ struct MealView: View {
     @State private var showingAlert = false
     @State private var shpwingAPIAlert = false
     @ObservedObject var presenter: MealPresenter
-        
+
     var body: some View {
         ZStack {
             if presenter.loadingState {
@@ -28,7 +28,7 @@ struct MealView: View {
                 }
             }
         }.onAppear {
-            if !(self.presenter.meal.ingredient.count > 0) {
+            if !(self.presenter.meal.ingredients.count > 0) {
                 self.presenter.getMealById(id: self.presenter.meal.id)
             }
         }.alert(isPresented: $showingAlert) {
@@ -61,8 +61,7 @@ extension MealView {
             Spacer()
             CustomIcon(imageName: "heart", title: "Favorite")
             Spacer()
-        }
-        .padding()
+        }.padding()
     }
     
     var imageMeal: some View {
@@ -79,10 +78,12 @@ extension MealView {
         VStack(alignment: .leading, spacing: 8) {
             Text("Ingredient")
                 .font(.headline)
-            
-            ForEach(Array(presenter.meal.ingredient.enumerated()), id: \.1.self) { (index, ingredient) in
-                Text("\(index+1). \(ingredient)")
-                    .font(.system(size: 16))
+
+            ForEach(self.presenter.meal.ingredients, id: \.id) { ingredient in
+                ZStack {
+                    Text(ingredient.title)
+                        .font(.system(size: 16))
+                }
             }
             
             Divider()
@@ -93,8 +94,7 @@ extension MealView {
             
             Text(self.presenter.meal.instructions ?? "Unknow")
                 .font(.system(size: 16))
-        }
-        .padding(.top)
+        }.padding(.top)
     }
 }
 

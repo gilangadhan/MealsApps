@@ -10,7 +10,7 @@ import Foundation
 
 protocol MealsUseCase {
     func getCategories(completion: @escaping (Result<[CategoryModel], Error>) -> Void)
-    func getMealsByTitle(title: String, completion: @escaping (Result<[MealModel], Error>) -> Void)
+    func getMealsByCategory(category: String, completion: @escaping (Result<[MealModel], Error>) -> Void)
     func getMealById(id: String, completion: @escaping (Result<MealModel, Error>) -> Void)
 }
 
@@ -27,8 +27,8 @@ class MealsInteractor: MealsUseCase {
         }
     }
 
-    func getMealsByTitle(title: String, completion: @escaping (Result<[MealModel], Error>) -> Void) {
-        repository.getMealsByTitle(title: title) { result in
+    func getMealsByCategory(category: String, completion: @escaping (Result<[MealModel], Error>) -> Void) {
+        repository.getMealsByCategory(category: category) { result in
             completion(result)
         }
     }
