@@ -16,9 +16,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
 
         let homeUseCase = Injection.init().provideHome()
-        let presenter = HomePresenter(homeUseCase: homeUseCase)
+        let favoriteUseCase = Injection.init().provideFavorite()
+      
+        let homePresenter = HomePresenter(homeUseCase: homeUseCase)
+        let favoritePresenter = FavoritePresenter(favoriteUseCase: favoriteUseCase)
 
-        let contentView = ContentView().environmentObject(presenter)
+        let contentView = ContentView()
+          .environmentObject(homePresenter)
+          .environmentObject(favoritePresenter)
         
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)

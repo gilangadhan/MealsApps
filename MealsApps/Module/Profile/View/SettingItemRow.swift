@@ -9,8 +9,28 @@
 import SwiftUI
 
 struct SettingItemRow: View {
+    var image: String = "settings"
+    var title: String = "Settings Apps"
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack {
+            Image(image)
+                .renderingMode(.original)
+                .resizable()
+                .scaledToFill()
+                .frame(width: 40, height: 40)
+            
+            Text(title)
+                .foregroundColor(.primary)
+                .font(.system(size: 18, weight: .medium, design: .rounded))
+            
+            Spacer()
+            
+            Image(systemName: "chevron.right")
+            
+        }
+        .padding(.horizontal)
+        .padding(.vertical, 8)
     }
 }
 

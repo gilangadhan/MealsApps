@@ -30,7 +30,6 @@ struct FavoriteView: View {
                                 }
                                 .buttonStyle(PlainButtonStyle())
                             }
-                            .padding(8)
                         }
                     }
                 }
