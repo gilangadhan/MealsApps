@@ -19,25 +19,25 @@ final class DataMapper {
             return newCategory
         }
     }
-
+    
     static func mapCategoryEntitiesToDomains(input: [CategoryEntity]) -> [CategoryModel] {
         return input.map { result in
             return CategoryModel(id: result.id, title: result.title, image: result.image, description: result.desc)
         }
     }
-
+    
     static func mapCategoryResponsesToDomains(input: [CategoryResponse]) -> [CategoryModel] {
         var categories: [CategoryModel] = []
-
+        
         for category in input {
             if let id = category.id, let title = category.title, let image = category.image, let description = category.description {
                 categories.append(CategoryModel(id: id, title: title, image: image, description: description))
             }
         }
-
+        
         return categories
     }
-
+    
     static func mapMealsResponsesToEntitiesByCategory(category: String, input: [MealResponse]) -> [MealEntity] {
         return input.map { result in
             let newMeal = MealEntity()
@@ -48,7 +48,7 @@ final class DataMapper {
             return newMeal
         }
     }
-
+    
     static func mapMealResponsesToDomains(category: String, input: [MealResponse]) -> [MealModel] {
         return input.map { result in
             var newMeal = MealModel(id: result.id ?? "", title: result.title ?? "Unknow", image: result.image ?? "Unknow")
@@ -56,22 +56,23 @@ final class DataMapper {
             return newMeal
         }
     }
-
+    
     static func mapIngredientEntitiesToDomains(input: [IngredientEntity]) -> [IngredientModel] {
         return input.map { result in
             return IngredientModel(id: result.id, title: result.title, mealId: result.mealId)
         }
     }
-
+    
     static func mapMealEntitiesToDomains(input: [MealEntity]) -> [MealModel] {
         return input.map { result in
-           return MealModel(id: result.id,
-                                    title: result.title,
-                                    image: result.image
+            return MealModel(id: result.id,
+                             title: result.title,
+                             image: result.image,
+                             category: result.category
             )
         }
     }
-
+    
     static func mapDetailMealEntityToDomain(input: MealEntity) -> MealModel {
         let mealEntity = input
         let ingredients = mapIngredientEntitiesToDomains(input: Array(mealEntity.ingredients))
@@ -88,7 +89,7 @@ final class DataMapper {
                          favorite: mealEntity.favorite
         )
     }
-
+    
     static func mapDetailMealResponseToEntity(mealId: String, input: MealResponse) -> MealEntity {
         let mealResponse = input
         let ingredients = mapIngredientResponseToEntity(mealId: mealId, meal: mealResponse)
@@ -105,7 +106,7 @@ final class DataMapper {
         mealEntity.ingredients = ingredients
         return mealEntity
     }
-
+    
     static func mapIngredientResponseToEntity(mealId: String, meal: MealResponse) -> List<IngredientEntity> {
         let ingredientEntities = List<IngredientEntity>()
         var ingredients = [meal.ingredient1, meal.ingredient2, meal.ingredient3, meal.ingredient4,
@@ -131,7 +132,7 @@ final class DataMapper {
             ingredientEntity.mealId = mealId
             ingredientEntities.append(ingredientEntity)
         }
-
+        
         return ingredientEntities
     }
 }
