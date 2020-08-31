@@ -9,7 +9,9 @@
 import Foundation
 
 struct IngredientModel: Equatable, Identifiable {
-    let id: String
-    let title: String
-    let mealId: String
+
+  let id: String
+  let title: String
+  let idMeal: String
+  
 }

@@ -10,7 +10,9 @@ import Foundation
 import RealmSwift
 
 class IngredientEntity: Object {
-    @objc dynamic var id: String = ""
-    @objc dynamic var title: String = ""
-    @objc dynamic var mealId: String = ""
+
+  @objc dynamic var id: String = ""
+  @objc dynamic var title: String = ""
+  @objc dynamic var idMeal: String = ""
+  
 }

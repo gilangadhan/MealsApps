@@ -9,19 +9,23 @@
 import Foundation
 
 struct CategoriesResponse: Decodable {
-    let categories: [CategoryResponse]
+
+  let categories: [CategoryResponse]
+  
 }
 
 struct CategoryResponse: Decodable {
-    private enum CodingKeys: String, CodingKey {
-        case id = "idCategory"
-        case title = "strCategory"
-        case image = "strCategoryThumb"
-        case description = "strCategoryDescription"
-    }
 
-    let id: String?
-    let title: String?
-    let image: String?
-    let description: String?
+  private enum CodingKeys: String, CodingKey {
+    case id = "idCategory"
+    case title = "strCategory"
+    case image = "strCategoryThumb"
+    case description = "strCategoryDescription"
+  }
+
+  let id: String?
+  let title: String?
+  let image: String?
+  let description: String?
+
 }

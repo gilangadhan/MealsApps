@@ -9,19 +9,25 @@
 import Foundation
 
 protocol FavoriteUseCase {
-    func getFavoriteMeals(completion: @escaping (Result<[MealModel], Error>) -> Void)
+
+  func getFavoriteMeals(completion: @escaping (Result<[MealModel], Error>) -> Void)
+
 }
 
 class FavoriteInteractor: FavoriteUseCase {
-    private let repository: MealRepositoryProtocol
 
-    required init(repository: MealRepositoryProtocol) {
-        self.repository = repository
+  private let repository: MealRepositoryProtocol
+  
+  required init(repository: MealRepositoryProtocol) {
+    self.repository = repository
+  }
+  
+  func getFavoriteMeals(
+    completion: @escaping (Result<[MealModel], Error>) -> Void
+  ) {
+    repository.getFavoriteMeals { result in
+      completion(result)
     }
+  }
 
-    func getFavoriteMeals(completion: @escaping (Result<[MealModel], Error>) -> Void) {
-        repository.getFavoriteMeals { result in
-            completion(result)
-        }
-    }
 }

@@ -10,8 +10,10 @@ import Foundation
 import RealmSwift
 
 class CategoryEntity: Object {
-    @objc dynamic var id: String = ""
-    @objc dynamic var title: String = ""
-    @objc dynamic var image: String = ""
-    @objc dynamic var desc: String = ""
+
+  @objc dynamic var id: String = ""
+  @objc dynamic var title: String = ""
+  @objc dynamic var image: String = ""
+  @objc dynamic var desc: String = ""
+  
 }
