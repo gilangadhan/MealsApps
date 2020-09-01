@@ -21,13 +21,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     let homeUseCase = Injection.init().provideHome()
     let favoriteUseCase = Injection.init().provideFavorite()
+    let searchUseCase = Injection.init().provideSearch()
     
     let homePresenter = HomePresenter(homeUseCase: homeUseCase)
     let favoritePresenter = FavoritePresenter(favoriteUseCase: favoriteUseCase)
-    
+    let searchPresenter = SearchPresenter(searchUseCase: searchUseCase)
+
     let contentView = ContentView()
       .environmentObject(homePresenter)
       .environmentObject(favoritePresenter)
+      .environmentObject(searchPresenter)
     
     if let windowScene = scene as? UIWindowScene {
       let window = UIWindow(windowScene: windowScene)

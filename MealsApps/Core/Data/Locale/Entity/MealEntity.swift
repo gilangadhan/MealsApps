@@ -23,5 +23,8 @@ class MealEntity: Object {
   @objc dynamic var favorite = false
 
   var ingredients = List<IngredientEntity>()
-  
+
+  override static func primaryKey() -> String? {
+    return "id"
+  }
 }

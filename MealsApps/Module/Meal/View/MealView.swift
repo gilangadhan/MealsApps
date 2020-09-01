@@ -28,7 +28,7 @@ struct MealView: View {
         }
       }
     }.onAppear {
-      if !(self.presenter.meal.ingredients.count > 0) {
+      if !(self.presenter.meal.ingredients.count > 0) || self.presenter.meal.category.isEmpty {
         self.presenter.getMeal()
       }
     }.alert(isPresented: $showingAlert) {
@@ -61,14 +61,14 @@ extension MealView {
         imageName: "link.circle",
         title: "Source"
       ).onTapGesture {
-          self.openUrl(self.presenter.meal.source ?? "")
+          self.openUrl(self.presenter.meal.source)
       }
       Spacer()
       CustomIcon(
         imageName: "video",
         title: "Video"
       ).onTapGesture {
-          self.openUrl(self.presenter.meal.youtube ?? "")
+          self.openUrl(self.presenter.meal.youtube)
       }
       Spacer()
       if presenter.meal.favorite {
@@ -114,7 +114,7 @@ extension MealView {
       Text("Instructions")
         .font(.headline)
 
-      Text(self.presenter.meal.instructions ?? "Unknow")
+      Text(self.presenter.meal.instructions)
         .font(.system(size: 16))
     }.padding(.top)
   }

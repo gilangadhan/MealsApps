@@ -76,4 +76,20 @@ extension RemoteDataSource: RemoteDataSourceProtocol {
     }
   }
 
+  func searchMeal(
+    by title: String,
+    result: @escaping (Result<[MealResponse], URLError>) -> Void
+  ) {
+    guard let url = URL(string: Endpoints.Gets.search.url + title) else { return }
+
+    AF.request(url)
+      .validate()
+      .responseDecodable(of: MealsResponse.self) { response in
+        switch response.result {
+        case .success(let value): result(.success(value.meals))
+        case .failure: result(.failure(.invalidResponse))
+        }
+    }
+  }
+
 }

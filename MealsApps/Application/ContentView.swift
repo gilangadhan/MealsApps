@@ -12,28 +12,26 @@ struct ContentView: View {
 
   @EnvironmentObject var homePresenter: HomePresenter
   @EnvironmentObject var favoritePresenter: FavoritePresenter
+  @EnvironmentObject var searchPresenter: SearchPresenter
 
   var body: some View {
     TabView {
       NavigationView {
         HomeView(presenter: homePresenter)
-      }
-      .tabItem {
+      }.tabItem {
         TabItem(imageName: "house", title: "Home")
       }
 
       NavigationView {
-        FavoriteView(presenter: favoritePresenter)
-      }
-      .tabItem {
-        TabItem(imageName: "heart", title: "Favorite")
+        SearchView(presenter: searchPresenter)
+      }.tabItem {
+        TabItem(imageName: "magnifyingglass", title: "Search")
       }
 
       NavigationView {
-        ProfileView()
-      }
-      .tabItem {
-        TabItem(imageName: "person.circle", title: "Profile")
+        FavoriteView(presenter: favoritePresenter)
+      }.tabItem {
+        TabItem(imageName: "heart", title: "Favorite")
       }
     }
   }

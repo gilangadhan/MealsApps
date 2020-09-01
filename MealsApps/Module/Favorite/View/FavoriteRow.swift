@@ -48,11 +48,22 @@ extension FavoriteRow {
         .font(.system(size: 20, weight: .semibold, design: .rounded))
         .lineLimit(3)
 
-      Text(meal.category ?? "Unknown")
+      Text(meal.category)
         .font(.system(size: 16))
         .lineLimit(2)
-    }
-    .padding(EdgeInsets(top: 0, leading: 16, bottom: 16, trailing: 16))
+
+      Text("From \(meal.area)")
+        .font(.system(size: 14))
+        .lineLimit(2)
+
+    }.padding(
+      EdgeInsets(
+        top: 0,
+        leading: 16,
+        bottom: 16,
+        trailing: 16
+      )
+    )
   }
 
 }

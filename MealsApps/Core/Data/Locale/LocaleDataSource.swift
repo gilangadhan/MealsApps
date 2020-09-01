@@ -93,6 +93,57 @@ extension LocaleDataSource: LocaleDataSourceProtocol {
     }
   }
 
+  func addMealsBy(
+    _ title: String,
+    from meals: [MealEntity],
+    result: @escaping (Result<[MealEntity], DatabaseError>) -> Void
+  ) {
+    if let realm = realm {
+      do {
+        try realm.write {
+          for meal in meals {
+            if let mealEntity = realm.object(ofType: MealEntity.self, forPrimaryKey: meal.id) {
+              if mealEntity.title == meal.title {
+                meal.favorite = mealEntity.favorite
+                realm.add(meal, update: .all)
+              } else {
+                realm.add(meal)
+              }
+            } else {
+              realm.add(meal)
+            }
+          }
+        }
+
+        let meals: Results<MealEntity> = {
+          realm.objects(MealEntity.self)
+            .filter("title = '\(title)'")
+            .sorted(byKeyPath: "title", ascending: true)
+        }()
+        result(.success(meals.toArray(ofType: MealEntity.self)))
+      } catch {
+        result(.failure(.requestFailed))
+      }
+    } else {
+      result(.failure(.invalidInstance))
+    }
+  }
+
+  func getMealsBy(
+    _ title: String,
+    result: @escaping (Result<[MealEntity], DatabaseError>) -> Void
+  ) {
+    if let realm = realm {
+      let meals: Results<MealEntity> = {
+        realm.objects(MealEntity.self)
+          .filter("title = '\(title)'")
+      }()
+      result(.success(meals.toArray(ofType: MealEntity.self)))
+    } else {
+      result(.failure(.invalidInstance))
+    }
+  }
+
   func getMeal(
     by idMeal: String,
     result: @escaping (Result<MealEntity, DatabaseError>) -> Void
@@ -190,7 +241,6 @@ extension LocaleDataSource: LocaleDataSourceProtocol {
     if let realm = realm, let mealEntity = { realm.objects(MealEntity.self).filter("id = '\(idMeal)'") }().first {
       do {
         try realm.write {
-          print(mealEntity)
           mealEntity.setValue(!mealEntity.favorite, forKey: "favorite")
           result(.success(mealEntity))
         }
