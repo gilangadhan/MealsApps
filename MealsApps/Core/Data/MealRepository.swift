@@ -21,6 +21,8 @@ protocol MealRepositoryProtocol {
 
 final class MealRepository: NSObject {
 
+  typealias MealInstance = (LocaleDataSource, RemoteDataSource) -> MealRepository
+
   fileprivate let remote: RemoteDataSource
   fileprivate let locale: LocaleDataSource
 
@@ -29,11 +31,8 @@ final class MealRepository: NSObject {
     self.remote = remote
   }
 
-  static func shared(
-    locale: LocaleDataSource,
-    remote: RemoteDataSource
-  ) -> MealRepository {
-    return MealRepository(locale: locale, remote: remote)
+  static let sharedInstance: MealInstance = { localeRepo, remoteRepo in
+    return MealRepository(locale: localeRepo, remote: remoteRepo)
   }
 
 }

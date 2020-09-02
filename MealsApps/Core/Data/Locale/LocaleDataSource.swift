@@ -22,12 +22,13 @@ protocol LocaleDataSourceProtocol: class {
 final class LocaleDataSource: NSObject {
 
   private let realm: Realm?
-  private override init() {
-    self.realm = try? Realm()
+  
+  private init(realm: Realm?) {
+    self.realm = realm
   }
-
-  static func shared() -> LocaleDataSource {
-    return LocaleDataSource()
+  
+  static let sharedInstance: (Realm?) -> LocaleDataSource = { realmDatabase in
+    return LocaleDataSource(realm: realmDatabase)
   }
 
 }
@@ -38,7 +39,10 @@ extension LocaleDataSource: LocaleDataSourceProtocol {
     result: @escaping (Result<[CategoryEntity], DatabaseError>) -> Void
   ) {
     if let realm = realm {
-      let categories: Results<CategoryEntity> = { realm.objects(CategoryEntity.self) }()
+      let categories: Results<CategoryEntity> = {
+        realm.objects(CategoryEntity.self)
+          .sorted(byKeyPath: "title", ascending: true)
+      }()
       result(.success(categories.toArray(ofType: CategoryEntity.self)))
     } else {
       result(.failure(.invalidInstance))
@@ -55,8 +59,9 @@ extension LocaleDataSource: LocaleDataSourceProtocol {
           for category in categories {
             realm.add(category)
           }
-          let categories: Results<CategoryEntity> = { realm.objects(CategoryEntity.self) }()
-          result(.success(categories.toArray(ofType: CategoryEntity.self)))
+          getCategories { response in
+            result(response)
+          }
         }
       } catch {
         result(.failure(.requestFailed))
@@ -78,13 +83,9 @@ extension LocaleDataSource: LocaleDataSourceProtocol {
             realm.add(meal)
           }
         }
-
-        let meals: Results<MealEntity> = {
-          realm.objects(MealEntity.self)
-            .filter("category = '\(category)'")
-            .sorted(byKeyPath: "title", ascending: true)
-        }()
-        result(.success(meals.toArray(ofType: MealEntity.self)))
+        getMeals(by: category) { response in
+          result(response)
+        }
       } catch {
         result(.failure(.requestFailed))
       }
@@ -114,13 +115,10 @@ extension LocaleDataSource: LocaleDataSourceProtocol {
             }
           }
         }
+        getMealsBy(title) { response in
+          result(response)
+        }
 
-        let meals: Results<MealEntity> = {
-          realm.objects(MealEntity.self)
-            .filter("title = '\(title)'")
-            .sorted(byKeyPath: "title", ascending: true)
-        }()
-        result(.success(meals.toArray(ofType: MealEntity.self)))
       } catch {
         result(.failure(.requestFailed))
       }
@@ -137,6 +135,7 @@ extension LocaleDataSource: LocaleDataSourceProtocol {
       let meals: Results<MealEntity> = {
         realm.objects(MealEntity.self)
           .filter("title = '\(title)'")
+          .sorted(byKeyPath: "title", ascending: true)
       }()
       result(.success(meals.toArray(ofType: MealEntity.self)))
     } else {
@@ -219,11 +218,8 @@ extension LocaleDataSource: LocaleDataSourceProtocol {
           mealEntity?.setValue(meal.ingredients, forKey: "ingredients")
         }
 
-        getMeal(by: idMeal) { localeEntity in
-          switch localeEntity {
-          case .success(let localeMeal): result(.success(localeMeal))
-          case .failure(let error): result(.failure(error))
-          }
+        getMeal(by: idMeal) { response in
+          result(response)
         }
       } catch {
         result(.failure(.requestFailed))
@@ -256,7 +252,11 @@ extension LocaleDataSource: LocaleDataSourceProtocol {
     result: @escaping (Result<[MealEntity], DatabaseError>) -> Void
   ) {
     if let realm = realm {
-      let mealEntities = { realm.objects(MealEntity.self).filter("favorite = \(true)") }()
+      let mealEntities = {
+        realm.objects(MealEntity.self)
+          .filter("favorite = \(true)")
+          .sorted(byKeyPath: "title", ascending: true)
+      }()
       result(.success(mealEntities.toArray(ofType: MealEntity.self)))
     } else {
       result(.failure(.invalidInstance))

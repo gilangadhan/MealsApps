@@ -21,9 +21,7 @@ final class RemoteDataSource: NSObject {
 
   private override init() { }
 
-  static func shared() -> RemoteDataSource {
-    return RemoteDataSource()
-  }
+  static let sharedInstance: RemoteDataSource =  RemoteDataSource()
 
 }
 
