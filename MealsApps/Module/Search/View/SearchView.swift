@@ -27,7 +27,7 @@ struct SearchView: View {
           }
         } else {
           if presenter.title.isEmpty {
-            Text("Come on, find your favorite food!")
+            CustomEmptyView(image: "search_meal", title: "Come on, find your favorite food!")
           } else if !(presenter.meals.count > 0) {
             Text("Keyword not found...")
           } else {
