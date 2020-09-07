@@ -1,6 +1,7 @@
 {
   "images" : [
     {
+      "filename" : "salad.pdf",
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -9,7 +10,6 @@
       "scale" : "2x"
     },
     {
-      "filename" : "notification-2(24x24)@3x-2.pdf",
       "idiom" : "universal",
       "scale" : "3x"
     }
