@@ -9,13 +9,19 @@
 import SwiftUI
 
 struct CustomEmptyView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+  var image: String
+  var title: String
+  
+  var body: some View {
+    VStack {
+      Image(image)
+        .resizable()
+        .renderingMode(.original)
+        .scaledToFit()
+        .frame(width: 250)
+      
+      Text(title)
+        .font(.system(.body, design: .rounded))
     }
-}
-
-struct CustomEmptyView_Previews: PreviewProvider {
-    static var previews: some View {
-        CustomEmptyView()
-    }
+  }
 }

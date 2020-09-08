@@ -12,15 +12,20 @@ import SDWebImageSwiftUI
 struct SearchRow: View {
 
   var meal: MealModel
+
   var body: some View {
     VStack {
-      imageCategory
-      content
-      detailContent
+      HStack(alignment: .top) {
+        imageCategory
+        content
+        Spacer()
+      }
+      .padding(.horizontal, 16)
+      .padding(.vertical, 8)
+
+      Divider()
+        .padding(.leading)
     }
-    .frame(width: UIScreen.main.bounds.width - 32, height: 250)
-    .background(Color.random.opacity(0.3))
-    .cornerRadius(30)
   }
 
 }
@@ -33,25 +38,24 @@ extension SearchRow {
       .indicator(.activity)
       .transition(.fade(duration: 0.5))
       .scaledToFit()
-      .frame(width: 200)
-      .cornerRadius(30)
-      .padding(.top)
+      .frame(width: 120)
+      .cornerRadius(20)
   }
 
   var content: some View {
     VStack(alignment: .leading, spacing: 10) {
       Text(meal.title)
-        .font(.title)
-        .bold()
+        .font(.system(size: 20, weight: .semibold, design: .rounded))
+        .lineLimit(3)
 
-    }
-  }
+      Text(meal.category)
+        .font(.system(size: 16))
+        .lineLimit(2)
 
-  var detailContent: some View {
-    HStack(alignment: .center) {
-      Text("from \(meal.area)")
+      Text("From \(meal.area)")
         .font(.system(size: 14))
         .lineLimit(2)
+
     }.padding(
       EdgeInsets(
         top: 0,
@@ -60,6 +64,20 @@ extension SearchRow {
         trailing: 16
       )
     )
+  }
+
+}
+
+struct SearchRow_Previews: PreviewProvider {
+
+  static var previews: some View {
+    let meal = MealModel(
+      id: "1",
+      title: "Cheese Burger Beef",
+      image: "https://hips.hearstapps.com/del.h-cdn.co/assets/16/14/1459797520-delish-skinny-orange-chicken-1.jpg",
+      category: "Beef"
+    )
+    return FavoriteRow(meal: meal)
   }
 
 }

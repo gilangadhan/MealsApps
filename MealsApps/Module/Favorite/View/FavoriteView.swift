@@ -21,7 +21,7 @@ struct FavoriteView: View {
         }
       } else {
         if presenter.meals.count == 0 {
-          Text("Empty...")
+          CustomEmptyView(image: "assetNoFavorite", title: "Your favorite is empty")
         } else {
           ScrollView(
             .vertical,
