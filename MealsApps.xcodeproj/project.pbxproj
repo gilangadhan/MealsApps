@@ -60,12 +60,13 @@
 		2AE4C89924E6777300825370 /* MealPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE4C89824E6777300825370 /* MealPresenter.swift */; };
 		2AE4C89F24EB876F00825370 /* DetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE4C89E24EB876F00825370 /* DetailRouter.swift */; };
 		2AE4C8A424EBABFA00825370 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 2AE4C8A324EBABFA00825370 /* SDWebImageSwiftUI */; };
-		862D461C2507643A0045DB1B /* CustomEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 862D461B2507643A0045DB1B /* CustomEmptyView.swift */; };
 		86A8644324ECCF300041F146 /* CustomIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A8644224ECCF300041F146 /* CustomIcon.swift */; };
 		86A8644624ECD0450041F146 /* Color+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A8644524ECD0450041F146 /* Color+Ext.swift */; };
 		86B8CAC624F3D98E0001F3EB /* TabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B8CAC524F3D98E0001F3EB /* TabItem.swift */; };
 		86B8CACA24F42E6B0001F3EB /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B8CAC924F42E6B0001F3EB /* SearchView.swift */; };
 		86B8CACC24F447400001F3EB /* RoundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B8CACB24F447400001F3EB /* RoundedCorner.swift */; };
+		86CA8FC92506A07C00843532 /* CloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CA8FC82506A07C00843532 /* CloseButton.swift */; };
+		86CA8FCB2506A6C300843532 /* CustomEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CA8FCA2506A6C300843532 /* CustomEmptyView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -120,12 +121,13 @@
 		2AE4C89424E6774500825370 /* MealView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealView.swift; sourceTree = "<group>"; };
 		2AE4C89824E6777300825370 /* MealPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealPresenter.swift; sourceTree = "<group>"; };
 		2AE4C89E24EB876F00825370 /* DetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRouter.swift; sourceTree = "<group>"; };
-		862D461B2507643A0045DB1B /* CustomEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomEmptyView.swift; sourceTree = "<group>"; };
 		86A8644224ECCF300041F146 /* CustomIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomIcon.swift; sourceTree = "<group>"; };
 		86A8644524ECD0450041F146 /* Color+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Ext.swift"; sourceTree = "<group>"; };
 		86B8CAC524F3D98E0001F3EB /* TabItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabItem.swift; sourceTree = "<group>"; };
 		86B8CAC924F42E6B0001F3EB /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		86B8CACB24F447400001F3EB /* RoundedCorner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCorner.swift; sourceTree = "<group>"; };
+		86CA8FC82506A07C00843532 /* CloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseButton.swift; sourceTree = "<group>"; };
+		86CA8FCA2506A6C300843532 /* CustomEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomEmptyView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -449,7 +451,8 @@
 				86B8CAC524F3D98E0001F3EB /* TabItem.swift */,
 				86B8CACB24F447400001F3EB /* RoundedCorner.swift */,
 				2AD6F2D024FCFA1000371156 /* SearchBar.swift */,
-				862D461B2507643A0045DB1B /* CustomEmptyView.swift */,
+				86CA8FC82506A07C00843532 /* CloseButton.swift */,
+				86CA8FCA2506A6C300843532 /* CustomEmptyView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -640,11 +643,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				2A686A0224E2797F00E7BD16 /* CategoriesResponse.swift in Sources */,
+				86CA8FCB2506A6C300843532 /* CustomEmptyView.swift in Sources */,
 				86B8CAC624F3D98E0001F3EB /* TabItem.swift in Sources */,
 				2AD6F2C724FCB7BD00371156 /* SearchPresenter.swift in Sources */,
 				2A686A1824E2868300E7BD16 /* MealRepository.swift in Sources */,
 				2AE4C88E24E64BC900825370 /* MealRow.swift in Sources */,
 				2AE4C89924E6777300825370 /* MealPresenter.swift in Sources */,
+				86CA8FC92506A07C00843532 /* CloseButton.swift in Sources */,
 				2AD6F2CD24FCDBB700371156 /* MealMapper.swift in Sources */,
 				2A97A0AB24F3CDA000828603 /* FavoriteRow.swift in Sources */,
 				2A9DD91C24EF764F0071F9CA /* CategoryEntity.swift in Sources */,
@@ -677,7 +682,6 @@
 				2A686A3424E3DBD600E7BD16 /* Injection.swift in Sources */,
 				2AE4C89224E6662900825370 /* BlurView.swift in Sources */,
 				2A6869E424E278DD00E7BD16 /* SceneDelegate.swift in Sources */,
-				862D461C2507643A0045DB1B /* CustomEmptyView.swift in Sources */,
 				2A97A0A724F3CCE700828603 /* FavoriteRouter.swift in Sources */,
 				2AE4C88124E5950200825370 /* DetailView.swift in Sources */,
 				2AD6F2D124FCFA1000371156 /* SearchBar.swift in Sources */,
@@ -827,6 +831,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"MealsApps/Preview Content\"";
+				DEVELOPMENT_TEAM = AYP4U693RV;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/MealsApps/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
@@ -847,6 +852,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"MealsApps/Preview Content\"";
+				DEVELOPMENT_TEAM = AYP4U693RV;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/MealsApps/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.5;

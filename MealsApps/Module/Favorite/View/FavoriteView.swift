@@ -9,9 +9,9 @@
 import SwiftUI
 
 struct FavoriteView: View {
-
+  
   @ObservedObject var presenter: FavoritePresenter
-
+  
   var body: some View {
     ZStack {
       if presenter.loadingState {
@@ -21,7 +21,7 @@ struct FavoriteView: View {
         }
       } else {
         if presenter.meals.count == 0 {
-          CustomEmptyView(image: "assetNoFavorite", title: "Your favorite is empty")
+          CustomEmptyView(image: "salad", title: "Your favorite is empty")
         } else {
           ScrollView(
             .vertical,
@@ -47,5 +47,5 @@ struct FavoriteView: View {
       displayMode: .automatic
     )
   }
-
+  
 }

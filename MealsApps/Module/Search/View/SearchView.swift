@@ -27,15 +27,9 @@ struct SearchView: View {
           }
         } else {
           if presenter.title.isEmpty {
-            CustomEmptyView(
-              image: "assetSearchMeal",
-              title: "Come on, find your favorite food!"
-            ).offset(y: 50)
+            CustomEmptyView(image: "search_meal", title: "Come on, find your favorite food!")
           } else if !(presenter.meals.count > 0) {
-            CustomEmptyView(
-              image: "assetSearchNotFound",
-              title: "Data not found"
-            ).offset(y: 80)
+            Text("Keyword not found...")
           } else {
             ScrollView(.vertical, showsIndicators: false) {
               ForEach(

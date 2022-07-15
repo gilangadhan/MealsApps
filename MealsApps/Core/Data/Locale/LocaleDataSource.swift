@@ -57,7 +57,7 @@ extension LocaleDataSource: LocaleDataSourceProtocol {
       do {
         try realm.write {
           for category in categories {
-            realm.add(category)
+            realm.add(category, update: .all)
           }
           getCategories { response in
             result(response)
@@ -80,7 +80,7 @@ extension LocaleDataSource: LocaleDataSourceProtocol {
       do {
         try realm.write {
           for meal in meals {
-            realm.add(meal)
+            realm.add(meal, update: .all)
           }
         }
         getMeals(by: category) { response in

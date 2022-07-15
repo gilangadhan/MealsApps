@@ -41,10 +41,11 @@ class HomePresenter: ObservableObject {
   
   func linkBuilder<Content: View>(
     for category: CategoryModel,
+    isPresentModal: Binding<Bool>,
     @ViewBuilder content: () -> Content
   ) -> some View {
     NavigationLink(
-    destination: router.makeDetailView(for: category)) { content() }
+    destination: router.makeDetailView(for: category, isPresentModal: isPresentModal)) { content() }
   }
 
 }
