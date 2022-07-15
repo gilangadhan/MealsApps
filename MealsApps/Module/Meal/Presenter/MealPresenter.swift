@@ -7,14 +7,17 @@
 //
 
 import Foundation
+import Combine
 
 class MealPresenter: ObservableObject {
 
+  private var cancellables: Set<AnyCancellable> = []
   private let mealUseCase: MealUseCase
 
   @Published var meal: MealModel
   @Published var errorMessage: String = ""
-  @Published var loadingState: Bool = false
+  @Published var isLoading: Bool = false
+  @Published var isError: Bool = false
 
   init(mealUseCase: MealUseCase) {
     self.mealUseCase = mealUseCase
@@ -22,38 +25,38 @@ class MealPresenter: ObservableObject {
   }
 
   func getMeal() {
-    loadingState = true
-    mealUseCase.getMeal { result in
-      switch result {
-      case .success(let meal):
-        DispatchQueue.main.async {
-          self.loadingState = false
-          self.meal = meal
-        }
-      case .failure(let error):
-        DispatchQueue.main.async {
-          self.loadingState = false
+    isLoading = true
+    mealUseCase.getMeal()
+      .receive(on: RunLoop.main)
+      .sink(receiveCompletion: { completion in
+        switch completion {
+        case .failure(let error):
           self.errorMessage = error.localizedDescription
+          self.isError = true
+          self.isLoading = false
+        case .finished:
+          self.isLoading = false
         }
-      }
-    }
+      }, receiveValue: { meal in
+        self.meal = meal
+      })
+      .store(in: &cancellables)
   }
 
   func updateFavoriteMeal() {
-    mealUseCase.updateFavoriteMeal { result in
-      switch result {
-      case .success(let meal):
-        DispatchQueue.main.async {
-          self.loadingState = false
-          self.meal = meal
+    mealUseCase.updateFavoriteMeal()
+      .receive(on: RunLoop.main)
+      .sink(receiveCompletion: { completion in
+        switch completion {
+        case .failure:
+          self.errorMessage = String(describing: completion)
+        case .finished:
+          self.isLoading = false
         }
-      case .failure(let error):
-        DispatchQueue.main.async {
-          self.loadingState = false
-          self.errorMessage = error.localizedDescription
-        }
-      }
-    }
+      }, receiveValue: { meal in
+        self.meal = meal
+      })
+      .store(in: &cancellables)
   }
 
 }

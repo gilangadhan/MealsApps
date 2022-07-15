@@ -16,8 +16,10 @@ struct MealView: View {
 
   var body: some View {
     ZStack {
-      if presenter.loadingState {
+      if presenter.isLoading {
         loadingIndicator
+      } else if presenter.isError {
+        errorIndicator
       } else {
         ScrollView(.vertical) {
           VStack {
@@ -54,6 +56,13 @@ extension MealView {
     }
   }
 
+  var errorIndicator: some View {
+    CustomEmptyView(
+      image: "assetSearchNotFound",
+      title: presenter.errorMessage
+    ).offset(y: 80)
+  }
+
   var menuButtonMeal: some View {
     HStack(alignment: .center) {
       Spacer()
@@ -61,14 +70,14 @@ extension MealView {
         imageName: "link.circle",
         title: "Source"
       ).onTapGesture {
-          self.openUrl(self.presenter.meal.source)
+        self.openUrl(self.presenter.meal.source)
       }
       Spacer()
       CustomIcon(
         imageName: "video",
         title: "Video"
       ).onTapGesture {
-          self.openUrl(self.presenter.meal.youtube)
+        self.openUrl(self.presenter.meal.youtube)
       }
       Spacer()
       if presenter.meal.favorite {
@@ -98,13 +107,15 @@ extension MealView {
 
   var content: some View {
     VStack(alignment: .leading, spacing: 8) {
-      Text("Ingredient")
-        .font(.headline)
+      if !presenter.meal.ingredients.isEmpty {
+        Text("Ingredient")
+          .font(.headline)
 
-      ForEach(self.presenter.meal.ingredients, id: \.id) { ingredient in
-        ZStack {
-          Text(ingredient.title)
-            .font(.system(size: 16))
+        ForEach(self.presenter.meal.ingredients, id: \.id) { ingredient in
+          ZStack {
+            Text(ingredient.title)
+              .font(.system(size: 16))
+          }
         }
       }
 

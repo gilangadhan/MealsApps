@@ -7,11 +7,12 @@
 //
 
 import Foundation
+import Combine
 
 protocol DetailUseCase {
 
-  func getMeals(completion: @escaping (Result<[MealModel], Error>) -> Void)
   func getCategory() -> CategoryModel
+  func getMeals() -> AnyPublisher<[MealModel], Error>
 
 }
 
@@ -19,7 +20,7 @@ class DetailInteractor: DetailUseCase {
 
   private let repository: MealRepositoryProtocol
   private let category: CategoryModel
-  
+
   required init(
     repository: MealRepositoryProtocol,
     category: CategoryModel
@@ -27,17 +28,13 @@ class DetailInteractor: DetailUseCase {
     self.repository = repository
     self.category = category
   }
-  
-  func getMeals(
-    completion: @escaping (Result<[MealModel], Error>) -> Void
-  ) {
-    repository.getMeals(by: category.title) { result in
-      completion(result)
-    }
-  }
-  
+
   func getCategory() -> CategoryModel {
     return category
+  }
+
+  func getMeals() -> AnyPublisher<[MealModel], Error> {
+    return repository.getMeals(by: category.title)
   }
 
 }

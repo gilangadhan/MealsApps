@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2A57017824ED0E5E00106BC5 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 2A57017724ED0E5E00106BC5 /* Realm */; };
-		2A57017A24ED0E5E00106BC5 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 2A57017924ED0E5E00106BC5 /* RealmSwift */; };
-		2A57018424EF6FDA00106BC5 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 2A57018324EF6FDA00106BC5 /* Alamofire */; };
 		2A6869E224E278DD00E7BD16 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6869E124E278DD00E7BD16 /* AppDelegate.swift */; };
 		2A6869E424E278DD00E7BD16 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6869E324E278DD00E7BD16 /* SceneDelegate.swift */; };
 		2A6869E624E278DD00E7BD16 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6869E524E278DD00E7BD16 /* ContentView.swift */; };
@@ -30,6 +27,10 @@
 		2A686A3624E3DCF600E7BD16 /* LocaleDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A686A3524E3DCF600E7BD16 /* LocaleDataSource.swift */; };
 		2A686A3924E52EFF00E7BD16 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A686A3824E52EFF00E7BD16 /* ActivityIndicator.swift */; };
 		2A686A3F24E53C0300E7BD16 /* CustomeError+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A686A3E24E53C0300E7BD16 /* CustomeError+Ext.swift */; };
+		2A68E9E028814F0D00E8B549 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 2A68E9DF28814F0D00E8B549 /* Realm */; };
+		2A68E9E228814F0D00E8B549 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 2A68E9E128814F0D00E8B549 /* RealmSwift */; };
+		2A68E9E528814F8600E8B549 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 2A68E9E428814F8600E8B549 /* Alamofire */; };
+		2A68E9E828814FF800E8B549 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 2A68E9E728814FF800E8B549 /* SDWebImageSwiftUI */; };
 		2A97A09324EFD07000828603 /* IngredientEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A97A09224EFD07000828603 /* IngredientEntity.swift */; };
 		2A97A09524EFD14D00828603 /* IngredientModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A97A09424EFD14D00828603 /* IngredientModel.swift */; };
 		2A97A09724F3768600828603 /* HomeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A97A09624F3768600828603 /* HomeInteractor.swift */; };
@@ -59,7 +60,6 @@
 		2AE4C89524E6774500825370 /* MealView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE4C89424E6774500825370 /* MealView.swift */; };
 		2AE4C89924E6777300825370 /* MealPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE4C89824E6777300825370 /* MealPresenter.swift */; };
 		2AE4C89F24EB876F00825370 /* DetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE4C89E24EB876F00825370 /* DetailRouter.swift */; };
-		2AE4C8A424EBABFA00825370 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 2AE4C8A324EBABFA00825370 /* SDWebImageSwiftUI */; };
 		86A8644324ECCF300041F146 /* CustomIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A8644224ECCF300041F146 /* CustomIcon.swift */; };
 		86A8644624ECD0450041F146 /* Color+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A8644524ECD0450041F146 /* Color+Ext.swift */; };
 		86B8CAC624F3D98E0001F3EB /* TabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B8CAC524F3D98E0001F3EB /* TabItem.swift */; };
@@ -135,10 +135,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2A57017A24ED0E5E00106BC5 /* RealmSwift in Frameworks */,
-				2A57018424EF6FDA00106BC5 /* Alamofire in Frameworks */,
-				2A57017824ED0E5E00106BC5 /* Realm in Frameworks */,
-				2AE4C8A424EBABFA00825370 /* SDWebImageSwiftUI in Frameworks */,
+				2A68E9E828814FF800E8B549 /* SDWebImageSwiftUI in Frameworks */,
+				2A68E9E528814F8600E8B549 /* Alamofire in Frameworks */,
+				2A68E9E228814F0D00E8B549 /* RealmSwift in Frameworks */,
+				2A68E9E028814F0D00E8B549 /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -151,7 +151,6 @@
 				2A686A0B24E282D200E7BD16 /* .swiftlint.yml */,
 				2A6869E024E278DD00E7BD16 /* MealsApps */,
 				2A6869DF24E278DD00E7BD16 /* Products */,
-				A872F3387C4C3FD8F1308BBE /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -530,13 +529,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		A872F3387C4C3FD8F1308BBE /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -555,10 +547,10 @@
 			);
 			name = MealsApps;
 			packageProductDependencies = (
-				2AE4C8A324EBABFA00825370 /* SDWebImageSwiftUI */,
-				2A57017724ED0E5E00106BC5 /* Realm */,
-				2A57017924ED0E5E00106BC5 /* RealmSwift */,
-				2A57018324EF6FDA00106BC5 /* Alamofire */,
+				2A68E9DF28814F0D00E8B549 /* Realm */,
+				2A68E9E128814F0D00E8B549 /* RealmSwift */,
+				2A68E9E428814F8600E8B549 /* Alamofire */,
+				2A68E9E728814FF800E8B549 /* SDWebImageSwiftUI */,
 			);
 			productName = MealsApps;
 			productReference = 2A6869DE24E278DD00E7BD16 /* MealsApps.app */;
@@ -571,7 +563,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1160;
-				LastUpgradeCheck = 1160;
+				LastUpgradeCheck = 1340;
 				ORGANIZATIONNAME = "Dicoding Indonesia";
 				TargetAttributes = {
 					2A6869DD24E278DD00E7BD16 = {
@@ -589,9 +581,9 @@
 			);
 			mainGroup = 2A6869D524E278DD00E7BD16;
 			packageReferences = (
-				2AE4C8A224EBABFA00825370 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
-				2A57017624ED0E5E00106BC5 /* XCRemoteSwiftPackageReference "realm-cocoa" */,
-				2A57018224EF6FDA00106BC5 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				2A68E9DE28814F0D00E8B549 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				2A68E9E328814F8600E8B549 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				2A68E9E628814FF800E8B549 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 			);
 			productRefGroup = 2A6869DF24E278DD00E7BD16 /* Products */;
 			projectDirPath = "";
@@ -737,6 +729,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -797,6 +790,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -891,51 +885,51 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		2A57017624ED0E5E00106BC5 /* XCRemoteSwiftPackageReference "realm-cocoa" */ = {
+		2A68E9DE28814F0D00E8B549 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/realm/realm-cocoa/";
+			repositoryURL = "https://github.com/realm/realm-swift";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.3.5;
+				branch = master;
+				kind = branch;
 			};
 		};
-		2A57018224EF6FDA00106BC5 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+		2A68E9E328814F8600E8B549 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.2.2;
+				branch = master;
+				kind = branch;
 			};
 		};
-		2AE4C8A224EBABFA00825370 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+		2A68E9E628814FF800E8B549 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.5.0;
+				branch = master;
+				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		2A57017724ED0E5E00106BC5 /* Realm */ = {
+		2A68E9DF28814F0D00E8B549 /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 2A57017624ED0E5E00106BC5 /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			package = 2A68E9DE28814F0D00E8B549 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = Realm;
 		};
-		2A57017924ED0E5E00106BC5 /* RealmSwift */ = {
+		2A68E9E128814F0D00E8B549 /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 2A57017624ED0E5E00106BC5 /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			package = 2A68E9DE28814F0D00E8B549 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
 		};
-		2A57018324EF6FDA00106BC5 /* Alamofire */ = {
+		2A68E9E428814F8600E8B549 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 2A57018224EF6FDA00106BC5 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			package = 2A68E9E328814F8600E8B549 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
 		};
-		2AE4C8A324EBABFA00825370 /* SDWebImageSwiftUI */ = {
+		2A68E9E728814FF800E8B549 /* SDWebImageSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 2AE4C8A224EBABFA00825370 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			package = 2A68E9E628814FF800E8B549 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
 			productName = SDWebImageSwiftUI;
 		};
 /* End XCSwiftPackageProductDependency section */

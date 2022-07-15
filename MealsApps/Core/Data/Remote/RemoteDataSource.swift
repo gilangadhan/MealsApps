@@ -8,13 +8,15 @@
 
 import Foundation
 import Alamofire
+import Combine
 
-protocol RemoteDataSourceProtocol: class {
+protocol RemoteDataSourceProtocol: AnyObject {
 
-  func getCategories(result: @escaping (Result<[CategoryResponse], URLError>) -> Void)
-  func getMeals(by category: String, result: @escaping (Result<[MealResponse], URLError>) -> Void)
-  func getMeal(by id: String, result: @escaping (Result<MealResponse, URLError>) -> Void)
-  
+  func getCategories() -> AnyPublisher<[CategoryResponse], Error>
+  func getMeal(by id: String) -> AnyPublisher<MealResponse, Error>
+  func getMeals(by category: String) -> AnyPublisher<[MealResponse], Error>
+  func searchMeal(by title: String) -> AnyPublisher<[MealResponse], Error>
+
 }
 
 final class RemoteDataSource: NSObject {
@@ -27,67 +29,77 @@ final class RemoteDataSource: NSObject {
 
 extension RemoteDataSource: RemoteDataSourceProtocol {
 
-  func getCategories(
-    result: @escaping (Result<[CategoryResponse], URLError>) -> Void
-  ) {
-    guard let url = URL(string: Endpoints.Gets.categories.url) else { return }
-
-    AF.request(url)
-      .validate()
-      .responseDecodable(of: CategoriesResponse.self) { response in
-        switch response.result {
-        case .success(let value): result(.success(value.categories))
-        case .failure: result(.failure(.invalidResponse))
-        }
-    }
-  }
-
-  func getMeals(
-    by category: String,
-    result: @escaping (Result<[MealResponse], URLError>) -> Void
-  ) {
-    guard let url = URL(string: Endpoints.Gets.meals.url + category) else { return }
-
-    AF.request(url)
-      .validate()
-      .responseDecodable(of: MealsResponse.self) { response in
-        switch response.result {
-        case .success(let value): result(.success(value.meals))
-        case .failure: result(.failure(.invalidResponse))
-        }
-    }
+  func getCategories() -> AnyPublisher<[CategoryResponse], Error> {
+    return Future<[CategoryResponse], Error> { completion in
+      if let url = URL(string: Endpoints.Gets.categories.url) {
+        AF.request(url)
+          .validate()
+          .responseDecodable(of: CategoriesResponse.self) { response in
+            switch response.result {
+            case .success(let value):
+              completion(.success(value.categories))
+            case .failure:
+              completion(.failure(URLError.invalidResponse))
+            }
+          }
+      }
+    }.eraseToAnyPublisher()
   }
 
   func getMeal(
-    by id: String,
-    result: @escaping (Result<MealResponse, URLError>) -> Void
-  ) {
-    guard let url = URL(string: Endpoints.Gets.meal.url + id) else { return }
+    by id: String
+  ) -> AnyPublisher<MealResponse, Error> {
+    return Future<MealResponse, Error> { completion in
+      if let url = URL(string: Endpoints.Gets.meal.url + id) {
+        AF.request(url)
+          .validate()
+          .responseDecodable(of: MealsResponse.self) { response in
+            switch response.result {
+            case .success(let value):
+              completion(.success(value.meals[0]))
+            case .failure:
+              completion(.failure(URLError.invalidResponse))
+            }
+          }
+      }
+    }.eraseToAnyPublisher()
+  }
 
-    AF.request(url)
-      .validate()
-      .responseDecodable(of: MealsResponse.self) { response in
-        switch response.result {
-        case .success(let value): result(.success(value.meals[0]))
-        case .failure: result(.failure(.invalidResponse))
-        }
-    }
+  func getMeals(
+    by category: String
+  ) -> AnyPublisher<[MealResponse], Error> {
+    return Future<[MealResponse], Error> { completion in
+      if let url = URL(string: Endpoints.Gets.meals.url + category) {
+        AF.request(url)
+          .validate()
+          .responseDecodable(of: MealsResponse.self) { response in
+            switch response.result {
+            case .success(let value):
+              completion(.success(value.meals))
+            case .failure:
+              completion(.failure(URLError.invalidResponse))
+            }
+          }
+      }
+    }.eraseToAnyPublisher()
   }
 
   func searchMeal(
-    by title: String,
-    result: @escaping (Result<[MealResponse], URLError>) -> Void
-  ) {
-    guard let url = URL(string: Endpoints.Gets.search.url + title) else { return }
-
-    AF.request(url)
-      .validate()
-      .responseDecodable(of: MealsResponse.self) { response in
-        switch response.result {
-        case .success(let value): result(.success(value.meals))
-        case .failure: result(.failure(.invalidResponse))
-        }
-    }
+    by title: String
+  ) -> AnyPublisher<[MealResponse], Error> {
+    return Future<[MealResponse], Error> { completion in
+      if let url = URL(string: Endpoints.Gets.search.url + title) {
+        AF.request(url)
+          .validate()
+          .responseDecodable(of: MealsResponse.self) { response in
+            switch response.result {
+            case .success(let value):
+              completion(.success(value.meals))
+            case .failure:
+              completion(.failure(URLError.invalidResponse))
+            }
+          }
+      }
+    }.eraseToAnyPublisher()
   }
-
 }

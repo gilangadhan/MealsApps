@@ -7,10 +7,11 @@
 //
 
 import Foundation
+import Combine
 
 protocol SearchUseCase {
 
-  func searchMeal(by title: String, completion: @escaping (Result<[MealModel], Error>) -> Void)
+  func searchMeal(by title: String) -> AnyPublisher<[MealModel], Error>
 
 }
 
@@ -22,13 +23,8 @@ class SearchInteractor: SearchUseCase {
     self.repository = repository
   }
 
-  func searchMeal(
-    by title: String,
-    completion: @escaping (Result<[MealModel], Error>) -> Void
-  ) {
-    repository.searchMeal(by: title) { result in
-      completion(result)
-    }
+  func searchMeal(by title: String) -> AnyPublisher<[MealModel], Error> {
+    return repository.searchMeal(by: title)
   }
 
 }

@@ -7,16 +7,16 @@
 //
 
 import Foundation
+import Combine
 
 protocol MealRepositoryProtocol {
 
-  func getCategories(result: @escaping (Result<[CategoryModel], Error>) -> Void)
-  func getMeals(by category: String, result: @escaping (Result<[MealModel], Error>) -> Void)
-  func getMeal(by idMeal: String, result: @escaping (Result<MealModel, Error>) -> Void)
-  func getFavoriteMeals(result: @escaping (Result<[MealModel], Error>) -> Void)
-  func updateFavoriteMeal(by idMeal: String, result: @escaping (Result<MealModel, Error>) -> Void)
-  func searchMeal(by title: String, result: @escaping (Result<[MealModel], Error>) -> Void)
-
+  func getCategories() -> AnyPublisher<[CategoryModel], Error>
+  func getMeal(by idMeal: String) -> AnyPublisher<MealModel, Error>
+  func getMeals(by category: String) -> AnyPublisher<[MealModel], Error>
+  func searchMeal(by title: String) -> AnyPublisher<[MealModel], Error>
+  func getFavoriteMeals() -> AnyPublisher<[MealModel], Error>
+  func updateFavoriteMeal(by idMeal: String) -> AnyPublisher<MealModel, Error>
 }
 
 final class MealRepository: NSObject {
@@ -39,172 +39,107 @@ final class MealRepository: NSObject {
 
 extension MealRepository: MealRepositoryProtocol {
 
-  func getCategories(
-    result: @escaping (Result<[CategoryModel], Error>) -> Void
-  ) {
-    locale.getCategories { localeResponses in
-      switch localeResponses {
-      case .success(let categoryEntity):
-        let categoryList = CategoryMapper.mapCategoryEntitiesToDomains(input: categoryEntity)
-        if categoryList.isEmpty {
-          self.remote.getCategories { remoteResponses in
-            switch remoteResponses {
-            case .success(let categoryResponses):
-              let categoryEntities = CategoryMapper.mapCategoryResponsesToEntities(input: categoryResponses)
-              self.locale.addCategories(from: categoryEntities) { addState in
-                switch addState {
-                case .success(let resultFromAdd):
-                  let resultList = CategoryMapper.mapCategoryEntitiesToDomains(input: resultFromAdd)
-                  result(.success(resultList))
-                case .failure(let error): result(.failure(error))
-                }
-              }
-            case .failure(let error): result(.failure(error))
+  func getCategories() -> AnyPublisher<[CategoryModel], Error> {
+    return self.locale.getCategories()
+      .flatMap { result -> AnyPublisher<[CategoryModel], Error> in
+        if result.isEmpty {
+          return self.remote.getCategories()
+            .map { CategoryMapper.mapCategoryResponsesToEntities(input: $0) }
+            .catch { _ in self.locale.getCategories() }
+            .flatMap { self.locale.addCategories(from: $0) }
+            .filter { $0 }
+            .flatMap { _ in self.locale.getCategories()
+              .map { CategoryMapper.mapCategoryEntitiesToDomains(input: $0) }
             }
-          }
+            .eraseToAnyPublisher()
         } else {
-          result(.success(categoryList))
+          return self.locale.getCategories()
+            .map { CategoryMapper.mapCategoryEntitiesToDomains(input: $0) }
+            .eraseToAnyPublisher()
         }
-      case .failure(let error): result(.failure(error))
-      }
-    }
-  }
-
-  func getMeals(
-    by category: String,
-    result: @escaping (Result<[MealModel], Error>) -> Void
-  ) {
-    locale.getMeals(by: category) { localeResponses in
-      switch localeResponses {
-      case .success(let mealsEntity):
-        let mealList = MealMapper.mapMealEntitiesToDomains(input: mealsEntity)
-        if mealList.isEmpty {
-          self.remote.getMeals(by: category) { remoteResponses in
-            switch remoteResponses {
-            case .success(let mealResponses):
-              let mealEnitites = MealMapper.mapMealResponsesToEntities(
-                by: category,
-                input: mealResponses
-              )
-              self.locale.addMeals(by: category, from: mealEnitites) { addState in
-                switch addState {
-                case .success(let resultFromAdd):
-                  let resultList = MealMapper.mapMealEntitiesToDomains(input: resultFromAdd)
-                  result(.success(resultList))
-                case .failure(let error): result(.failure(error))
-                }
-              }
-            case .failure(let error): result(.failure(error))
-            }
-          }
-        } else {
-          result(.success(mealList))
-        }
-      case .failure(let error): result(.failure(error))
-      }
-    }
+      }.eraseToAnyPublisher()
   }
 
   func getMeal(
-    by idMeal: String,
-    result: @escaping (Result<MealModel, Error>) -> Void
-  ) {
-    locale.getMeal(by: idMeal) { localeResponse in
-      switch localeResponse {
-      case .success(let mealEntity):
-        let mealModel = MealMapper.mapDetailMealEntityToDomain(input: mealEntity)
-        if mealModel.ingredients.isEmpty {
-          self.remote.getMeal(by: idMeal) { remoteResponse in
-            switch remoteResponse {
-            case .success(let mealResponse):
-              let mealEntity = MealMapper.mapDetailMealResponseToEntity(by: idMeal, input: mealResponse)
-              self.locale.updateMeals(by: idMeal, meal: mealEntity) { updateState in
-                switch updateState {
-                case .success(let resultFromUpdate):
-                  let resultMeal = MealMapper.mapDetailMealEntityToDomain(input: resultFromUpdate)
-                  result(.success(resultMeal))
-                case .failure(let error): result(.failure(error))
-                }
-              }
-            case .failure(let error): result(.failure(error))
-            }
-          }
+    by idMeal: String
+  ) -> AnyPublisher<MealModel, Error> {
+    return self.locale.getMeal(by: idMeal)
+      .flatMap { result -> AnyPublisher<MealModel, Error> in
+        if result.ingredients.isEmpty {
+          return self.remote.getMeal(by: idMeal)
+            .map { MealMapper.mapDetailMealResponseToEntity(by: idMeal, input: $0) }
+            .catch { _ in self.locale.getMeal(by: idMeal) }
+            .flatMap { self.locale.updateMeal(by: idMeal, meal: $0) }
+            .filter { $0 }
+            .flatMap { _ in self.locale.getMeal(by: idMeal)
+              .map { MealMapper.mapDetailMealEntityToDomain(input: $0) }
+            }.eraseToAnyPublisher()
         } else {
-          result(.success(mealModel))
+          return self.locale.getMeal(by: idMeal)
+            .map { MealMapper.mapDetailMealEntityToDomain(input: $0) }
+            .eraseToAnyPublisher()
         }
-      case .failure(let error): result(.failure(error))
-      }
-    }
+      }.eraseToAnyPublisher()
   }
 
-  func getFavoriteMeals(
-    result: @escaping (Result<[MealModel], Error>) -> Void
-  ) {
-    locale.getFavoriteMeals { localeResponse in
-      switch localeResponse {
-      case .success(let localeEntities):
-        let resultMeals = MealMapper.mapMealEntitiesToDomains(input: localeEntities)
-        result(.success(resultMeals))
-      case .failure(let error): result(.failure(error))
-      }
-    }
-  }
-
-  func updateFavoriteMeal(
-    by idMeal: String,
-    result: @escaping (Result<MealModel, Error>) -> Void
-  ) {
-    locale.updateFavoriteMeal(by: idMeal) { localeResponse in
-      switch localeResponse {
-      case .success(let localeEntity):
-        let resultMeal = MealMapper.mapDetailMealEntityToDomain(input: localeEntity)
-        result(.success(resultMeal))
-      case .failure(let error): result(.failure(error))
-      }
-    }
+  func getMeals(
+    by category: String
+  ) -> AnyPublisher<[MealModel], Error> {
+    return self.locale.getMeals(by: category)
+      .flatMap { result -> AnyPublisher<[MealModel], Error> in
+        if result.isEmpty {
+          return self.remote.getMeals(by: category)
+            .map { MealMapper.mapMealResponsesToEntities(by: category, input: $0) }
+            .catch { _ in self.locale.getMeals(by: category) }
+            .flatMap { self.locale.addMeals(by: category, from: $0) }
+            .filter { $0 }
+            .flatMap { _ in self.locale.getMeals(by: category)
+              .map {  MealMapper.mapMealEntitiesToDomains(input: $0) }
+            }.eraseToAnyPublisher()
+        } else {
+          return self.locale.getMeals(by: category)
+            .map { MealMapper.mapMealEntitiesToDomains(input: $0) }
+            .eraseToAnyPublisher()
+        }
+      }.eraseToAnyPublisher()
   }
 
   func searchMeal(
-    by title: String,
-    result: @escaping (Result<[MealModel], Error>) -> Void
-  ) {
-    remote.searchMeal(by: title) { remoteResponse in
-      switch remoteResponse {
-      case .success(let mealResponses):
-        
-        self.locale.getMealsBy(title) { localeResponses in
-          switch localeResponses {
-          case .success(let mealEntities):
-
-            if mealResponses.count > mealEntities.count {
-
-              let meals = MealMapper.mapDetailMealResponseToEntity(input: mealResponses)
-
-              self.locale.addMealsBy(title, from: meals) { addState in
-                switch addState {
-                case .success(let resultFromAdd):
-
-                  let resultList = MealMapper.mapDetailMealEntityToDomains(input: resultFromAdd)
-                  result(.success(resultList))
-
-                case .failure(let error):
-                  result(.failure(error))
-                }
-              }
+    by title: String
+  ) -> AnyPublisher<[MealModel], Error> {
+    return self.remote.searchMeal(by: title)
+      .map { MealMapper.mapDetailMealResponseToEntity(input: $0) }
+      .catch { _ in self.locale.getMealsBy(title) }
+      .flatMap { responses  in
+        self.locale.getMealsBy(title)
+          .flatMap { locale -> AnyPublisher<[MealModel], Error> in
+            if responses.count > locale.count {
+              return self.locale.addMealsBy(title, from: responses)
+                .filter { $0 }
+                .flatMap { _ in self.locale.getMealsBy(title)
+                  .map { MealMapper.mapDetailMealEntityToDomains(input: $0) }
+                }.eraseToAnyPublisher()
             } else {
-
-              let resultList = MealMapper.mapDetailMealEntityToDomains(input: mealEntities)
-              result(.success(resultList))
-
+              return self.locale.getMealsBy(title)
+                .map { MealMapper.mapDetailMealEntityToDomains(input: $0) }
+                .eraseToAnyPublisher()
             }
-          case .failure(let error):
-            result(.failure(error))
           }
-        }
-      case .failure(let error):
-        result(.failure(error))
-      }
-    }
+      }.eraseToAnyPublisher()
+  }
+
+  func getFavoriteMeals() -> AnyPublisher<[MealModel], Error> {
+    return self.locale.getFavoriteMeals()
+      .map { MealMapper.mapMealEntitiesToDomains(input: $0) }
+      .eraseToAnyPublisher()
+  }
+
+  func updateFavoriteMeal(
+    by idMeal: String
+  ) -> AnyPublisher<MealModel, Error> {
+    return self.locale.updateFavoriteMeal(by: idMeal)
+      .map { MealMapper.mapDetailMealEntityToDomain(input: $0) }
+      .eraseToAnyPublisher()
   }
 
 }

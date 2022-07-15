@@ -9,36 +9,20 @@
 import SwiftUI
 
 struct FavoriteView: View {
-  
+
   @ObservedObject var presenter: FavoritePresenter
-  
+
   var body: some View {
     ZStack {
-      if presenter.loadingState {
-        VStack {
-          Text("Loading...")
-          ActivityIndicator()
-        }
+
+      if presenter.isLoading {
+        loadingIndicator
+      } else if presenter.isError {
+        errorIndicator
+      } else if presenter.meals.count == 0 {
+        emptyFavorites
       } else {
-        if presenter.meals.count == 0 {
-          CustomEmptyView(image: "salad", title: "Your favorite is empty")
-        } else {
-          ScrollView(
-            .vertical,
-            showsIndicators: false
-          ) {
-            ForEach(
-              self.presenter.meals,
-              id: \.id
-            ) { meal in
-              ZStack {
-                self.presenter.linkBuilder(for: meal) {
-                  FavoriteRow(meal: meal)
-                }.buttonStyle(PlainButtonStyle())
-              }
-            }
-          }
-        }
+        content
       }
     }.onAppear {
       self.presenter.getFavoriteMeals()
@@ -47,5 +31,47 @@ struct FavoriteView: View {
       displayMode: .automatic
     )
   }
-  
+
+}
+
+extension FavoriteView {
+  var loadingIndicator: some View {
+    VStack {
+      Text("Loading...")
+      ActivityIndicator()
+    }
+  }
+
+  var errorIndicator: some View {
+    CustomEmptyView(
+      image: "assetSearchNotFound",
+      title: presenter.errorMessage
+    ).offset(y: 80)
+  }
+
+  var emptyFavorites: some View {
+    CustomEmptyView(
+      image: "assetNoFavorite",
+      title: "Your favorite is empty"
+    ).offset(y: 80)
+  }
+
+  var content: some View {
+    ScrollView(
+      .vertical,
+      showsIndicators: false
+    ) {
+      ForEach(
+        self.presenter.meals,
+        id: \.id
+      ) { meal in
+        ZStack {
+          self.presenter.linkBuilder(for: meal) {
+            FavoriteRow(meal: meal)
+          }.buttonStyle(PlainButtonStyle())
+        }
+
+      }
+    }
+  }
 }

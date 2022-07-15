@@ -7,12 +7,13 @@
 //
 
 import Foundation
+import Combine
 
 protocol MealUseCase {
 
-  func getMeal(completion: @escaping (Result<MealModel, Error>) -> Void)
+  func getMeal() -> AnyPublisher<MealModel, Error>
   func getMeal() -> MealModel
-  func updateFavoriteMeal(completion: @escaping (Result<MealModel, Error>) -> Void)
+  func updateFavoriteMeal() -> AnyPublisher<MealModel, Error>
 
 }
 
@@ -29,24 +30,16 @@ class MealInteractor: MealUseCase {
     self.meal = meal
   }
 
-  func getMeal(
-    completion: @escaping (Result<MealModel, Error>) -> Void
-  ) {
-    repository.getMeal(by: meal.id) { result in
-      completion(result)
-    }
+  func getMeal() -> AnyPublisher<MealModel, Error> {
+    return repository.getMeal(by: meal.id)
   }
 
   func getMeal() -> MealModel {
     return meal
   }
 
-  func updateFavoriteMeal(
-    completion: @escaping (Result<MealModel, Error>) -> Void
-  ) {
-    repository.updateFavoriteMeal(by: meal.id) { result in
-      completion(result)
-    }
+  func updateFavoriteMeal() -> AnyPublisher<MealModel, Error> {
+    return repository.updateFavoriteMeal(by: meal.id)
   }
 
 }

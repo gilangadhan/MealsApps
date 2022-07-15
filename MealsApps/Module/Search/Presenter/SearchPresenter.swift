@@ -7,15 +7,18 @@
 //
 
 import SwiftUI
+import Combine
 
 class SearchPresenter: ObservableObject {
 
+  private var cancellables: Set<AnyCancellable> = []
   private let router = SearchRouter()
   private let searchUseCase: SearchUseCase
 
   @Published var meals: [MealModel] = []
   @Published var errorMessage: String = ""
-  @Published var loadingState: Bool = false
+  @Published var isLoading: Bool = false
+  @Published var isError: Bool = false
 
   var title = ""
 
@@ -24,21 +27,22 @@ class SearchPresenter: ObservableObject {
   }
 
   func searchMeal() {
-    loadingState = true
-    searchUseCase.searchMeal(by: title) { result in
-      switch result {
-      case .success(let meals):
-        DispatchQueue.main.async {
-          self.loadingState = false
-          self.meals = meals
-        }
-      case .failure(let error):
-        DispatchQueue.main.async {
-          self.loadingState = false
+    isLoading = true
+    searchUseCase.searchMeal(by: title)
+      .receive(on: RunLoop.main)
+      .sink(receiveCompletion: { completion in
+        switch completion {
+        case .failure(let error):
           self.errorMessage = error.localizedDescription
+          self.isError = true
+          self.isLoading = false
+        case .finished:
+          self.isLoading = false
         }
-      }
-    }
+      }, receiveValue: { meals in
+        self.meals = meals
+      })
+      .store(in: &cancellables)
   }
 
   func linkBuilder<Content: View>(
@@ -46,7 +50,8 @@ class SearchPresenter: ObservableObject {
     @ViewBuilder content: () -> Content
   ) -> some View {
     NavigationLink(
-    destination: router.makeMealView(for: meal)) { content() }
+      destination: router.makeMealView(for: meal)
+    ) { content() }
   }
 
 }
