@@ -171,29 +171,38 @@ extension MealRepository: MealRepositoryProtocol {
     remote.searchMeal(by: title) { remoteResponse in
       switch remoteResponse {
       case .success(let mealResponses):
-        let resultMeal = MealMapper.mapMealResponsesToDomains(input: mealResponses)
+        
         self.locale.getMealsBy(title) { localeResponses in
           switch localeResponses {
           case .success(let mealEntities):
+
             if mealResponses.count > mealEntities.count {
+
               let meals = MealMapper.mapDetailMealResponseToEntity(input: mealResponses)
+
               self.locale.addMealsBy(title, from: meals) { addState in
                 switch addState {
                 case .success(let resultFromAdd):
+
                   let resultList = MealMapper.mapDetailMealEntityToDomains(input: resultFromAdd)
                   result(.success(resultList))
-                case .failure(let error): result(.failure(error))
+
+                case .failure(let error):
+                  result(.failure(error))
                 }
               }
             } else {
+
               let resultList = MealMapper.mapDetailMealEntityToDomains(input: mealEntities)
               result(.success(resultList))
+
             }
-          case .failure(let error): result(.failure(error))
+          case .failure(let error):
+            result(.failure(error))
           }
         }
-        result(.success(resultMeal))
-      case .failure(let error): result(.failure(error))
+      case .failure(let error):
+        result(.failure(error))
       }
     }
   }
