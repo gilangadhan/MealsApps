@@ -91,7 +91,7 @@ extension LocaleDataSource: LocaleDataSourceProtocol {
         }()
 
         guard let meal = meals.first else {
-          completion(.failure(DatabaseError.requestFailed))
+          completion(.failure(DatabaseError.emptyData))
           return
         }
 
@@ -206,9 +206,8 @@ extension LocaleDataSource: LocaleDataSourceProtocol {
             mealEntity.setValue(meal.source, forKey: "source")
             mealEntity.setValue(meal.favorite, forKey: "favorite")
             mealEntity.setValue(meal.ingredients, forKey: "ingredients")
+            completion(.success(true))
           }
-          completion(.success(true))
-
         } catch {
           completion(.failure(DatabaseError.requestFailed))
         }
@@ -247,7 +246,11 @@ extension LocaleDataSource: LocaleDataSourceProtocol {
             .filter("favorite = \(true)")
             .sorted(byKeyPath: "title", ascending: true)
         }()
-        completion(.success(mealEntities.toArray(ofType: MealEntity.self)))
+        if mealEntities.isEmpty, mealEntities.count == 0 {
+          completion(.failure(DatabaseError.emptyFavorite))
+        } else {
+          completion(.success(mealEntities.toArray(ofType: MealEntity.self)))
+        }
       } else {
         completion(.failure(DatabaseError.invalidInstance))
       }
@@ -264,8 +267,8 @@ extension LocaleDataSource: LocaleDataSourceProtocol {
         do {
           try realm.write {
             mealEntity.setValue(!mealEntity.favorite, forKey: "favorite")
+            completion(.success(mealEntity))
           }
-          completion(.success(mealEntity))
         } catch {
           completion(.failure(DatabaseError.requestFailed))
         }

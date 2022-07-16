@@ -33,6 +33,7 @@ class FavoritePresenter: ObservableObject {
         case .failure(let error):
           self.errorMessage = error.localizedDescription
           self.isError = true
+          self.isLoading = false
         case .finished:
           self.isLoading = false
         }

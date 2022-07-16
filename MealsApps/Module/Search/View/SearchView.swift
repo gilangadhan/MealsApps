@@ -23,12 +23,12 @@ struct SearchView: View {
       ZStack {
         if presenter.isLoading {
           loadingIndicator
+        } else if presenter.isError {
+          errorIndicator
         } else if presenter.title.isEmpty {
           emptyTitle
         } else if presenter.meals.isEmpty {
           emptyMeals
-        } else if presenter.isError {
-          errorIndicator
         } else {
           ScrollView(.vertical, showsIndicators: false) {
             ForEach(

@@ -119,14 +119,16 @@ extension MealView {
         }
       }
 
-      Divider()
-        .padding(.vertical)
+      if !self.presenter.meal.instructions.isEmpty {
+        Divider()
+          .padding(.vertical)
+        Text("Instructions")
+          .font(.headline)
 
-      Text("Instructions")
-        .font(.headline)
 
-      Text(self.presenter.meal.instructions)
-        .font(.system(size: 16))
+        Text(self.presenter.meal.instructions)
+          .font(.system(size: 16))
+      }
     }.padding(.top)
   }
 
