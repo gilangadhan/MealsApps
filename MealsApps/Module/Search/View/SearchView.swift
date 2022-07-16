@@ -11,6 +11,7 @@ import SwiftUI
 struct SearchView: View {
 
   @ObservedObject var presenter: SearchPresenter
+  @EnvironmentObject var networkMonitor: NetworkMonitor
 
   var body: some View {
     VStack {
@@ -76,7 +77,9 @@ extension SearchView {
   var emptyMeals: some View {
     CustomEmptyView(
       image: "assetSearchNotFound",
-      title: "Data not found"
+      title: networkMonitor.isConnected
+      ? "Data not found"
+      : "The internet connection is offline, please try again later!"
     ).offset(y: 80)
   }
 

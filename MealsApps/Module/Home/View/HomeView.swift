@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct HomeView: View {
-
+  @EnvironmentObject var networkMonitor: NetworkMonitor
   @ObservedObject var presenter: HomePresenter
 
   var body: some View {
@@ -54,7 +54,9 @@ extension HomeView {
   var emptyCategories: some View {
     CustomEmptyView(
       image: "assetNoFavorite",
-      title: "The meal category is empty"
+      title: networkMonitor.isConnected
+      ? "The meal category is empty"
+      : "The internet connection is offline, please try again later!"
     ).offset(y: 80)
   }
 

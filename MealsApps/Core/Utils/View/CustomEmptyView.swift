@@ -22,6 +22,7 @@ struct CustomEmptyView: View {
       
       Text(title)
         .font(.system(.body, design: .rounded))
+        .multilineTextAlignment(.center)
     }
   }
 }

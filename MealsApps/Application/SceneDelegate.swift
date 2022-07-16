@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftUI
+import Alamofire
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   
@@ -31,6 +32,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
       .environmentObject(homePresenter)
       .environmentObject(favoritePresenter)
       .environmentObject(searchPresenter)
+      .environmentObject(NetworkMonitor())
     
     if let windowScene = scene as? UIWindowScene {
       let window = UIWindow(windowScene: windowScene)
@@ -40,4 +42,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
   }
   
+}
+
+final class NetworkMonitor: ObservableObject {
+  @Published var isConnected = true
+
+  init() {
+    if let network = NetworkReachabilityManager(), network.isReachable {
+      isConnected = true
+    } else {
+      isConnected = false
+    }
+  }
 }
